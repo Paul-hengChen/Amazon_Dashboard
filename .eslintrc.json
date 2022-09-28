@@ -1,0 +1,35 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": ["plugin:react/recommended", "airbnb"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function"
+      }
+    ],
+    "react/require-default-props": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}],
+    "jsx-a11y/alt-text": [ 2, {
+      "elements": [ "img", "object", "area", "input[type=\"image\"]" ],
+      "img": ["Image"],
+      "object": ["Object"],
+      "area": ["Area"],
+      "input[type=\"image\"]": ["InputImage"]
+    }],
+    "max-len": ["error", {"code": 1200}]
+  }
+}
