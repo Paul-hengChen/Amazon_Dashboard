@@ -1,33 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const Chart = () => {
+const Chart = ({ title }) => {
   const options = {
     title: {
-      text: 'U.S Solar Employment Growth by Job Category, 2010-2020',
+      text: title,
     },
-
-    subtitle: {
-      text: 'Source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>',
-    },
-
-    yAxis: {
-      title: {
-        text: 'Number of Employees',
-      },
-    },
-
-    xAxis: {
-      accessibility: {
-        rangeDescription: 'Range: 2010 to 2020',
-      },
-    },
-
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'middle',
+    credits: {
+      enabled: false,
     },
 
     plotOptions: {
@@ -35,11 +17,11 @@ const Chart = () => {
         label: {
           connectorAllowed: false,
         },
-        pointStart: 2010,
       },
     },
 
     series: [{
+      type: 'column',
       name: 'Installation & Developers',
       data: [43934, 48656, 65165, 81827, 112143, 142383,
         171533, 165174, 155157, 161454, 154610],
@@ -64,13 +46,17 @@ const Chart = () => {
   };
 
   return (
-    <div className=" border border-solid w-1/2 p-5">
+    <div className="border border-solid p-5">
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
       />
     </div>
   );
+};
+
+Chart.propTypes = {
+  title: PropTypes.string,
 };
 
 export default Chart;
