@@ -1,19 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { DatePicker } from 'antd';
 import moment from 'moment';
-import './style.css';
 
 const { RangePicker } = DatePicker;
 
-const Calendar = () => (
+const Calendar = ({ onChange }) => (
   <RangePicker
-    className="flex"
+    onChange={onChange}
     defaultValue={moment(new Date())}
     defaultPickerValue={moment(new Date())}
     format="YYYY-MM-DD"
     allowClear={false}
-    popupStyle={{ backgroundColor: 'white' }}
   />
 );
 
+Calendar.propTypes = {
+  onChange: PropTypes.func,
+};
 export default Calendar;

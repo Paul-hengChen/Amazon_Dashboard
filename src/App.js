@@ -3,8 +3,8 @@ import './style/app.scss';
 import './style/tailwindcss.css';
 import 'animate.css';
 import 'antd/dist/antd.css';
-
-import { Chart, Header } from './component';
+import { Header } from './container';
+import { Chart } from './component';
 
 const App = () => (
   <div className="App">
