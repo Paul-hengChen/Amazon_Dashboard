@@ -25,7 +25,6 @@ const Select = ({
 Select.propTypes = {
   onChange: PropTypes.func,
   onSearch: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.arrayOf(PropTypes.object),
 };
 
