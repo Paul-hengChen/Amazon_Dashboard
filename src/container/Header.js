@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { ExportOutlined } from '@ant-design/icons';
 import { AREA_OPTIONS } from '../constants';
-import { RangeCalendar, Select, Title } from '../component';
+import {
+  RangeCalendar, Select, Title, Button,
+} from '../component';
 
 const Header = () => {
   const onDateChange = (date, dateString) => {
@@ -15,6 +18,7 @@ const Header = () => {
       <RangeCalendar onChange={onDateChange} />
       <Title text="Amazon_Dashboard" />
       <Select options={AREA_OPTIONS} onChange={onAreaChange} value={area} />
+      <Button icon={<ExportOutlined />} text="匯出" type="primary" size="large" />
     </div>
   );
 };
