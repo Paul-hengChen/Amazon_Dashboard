@@ -4,23 +4,19 @@ import { Select as AntdSelect } from 'antd';
 
 const Select = ({
   onChange, onSearch, options = [], ...props
-}) => {
-  console.log({ options }, 'options');
-  return (
-    <AntdSelect
-      showSearch
-      placeholder="Select a person"
-      onChange={onChange}
-      onSearch={onSearch}
-      optionLabelProp="label"
-      filterOption={(input, option) => (option.children).toLowerCase().includes(input.toLowerCase())}
-      {...props}
-
-    >
-      {!!options?.length && options.map(({ value, label }) => <AntdSelect.Option value={value}>{label}</AntdSelect.Option>)}
-    </AntdSelect>
-  );
-};
+}) => (
+  <AntdSelect
+    showSearch
+    placeholder="Select a person"
+    onChange={onChange}
+    onSearch={onSearch}
+    optionLabelProp="label"
+    filterOption={(input, option) => (option.children).toLowerCase().includes(input.toLowerCase())}
+    {...props}
+  >
+    {!!options?.length && options.map(({ value, label }) => <AntdSelect.Option value={value}>{label}</AntdSelect.Option>)}
+  </AntdSelect>
+);
 
 Select.propTypes = {
   onChange: PropTypes.func,

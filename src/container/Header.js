@@ -7,8 +7,6 @@ const Header = () => {
     console.log(date, dateString);
   };
 
-  console.log({ AREA_OPTIONS });
-
   return (
     <div className="p-3 h-12 flex w-full z-10 sticky top-0 bg-teal-600">
       <RangeCalendar onChange={onDateChange} />

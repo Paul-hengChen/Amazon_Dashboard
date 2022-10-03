@@ -19,6 +19,13 @@ const Chart = ({ title }) => {
         },
       },
     },
+    exporting: {
+      buttons: {
+        contextButton: {
+          enabled: true,
+        },
+      },
+    },
 
     series: [{
       type: 'column',
