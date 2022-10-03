@@ -22,14 +22,29 @@
     ],
     "react/require-default-props": "off",
     "import/prefer-default-export": "off",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}],
-    "jsx-a11y/alt-text": [ 2, {
-      "elements": [ "img", "object", "area", "input[type=\"image\"]" ],
-      "img": ["Image"],
-      "object": ["Object"],
-      "area": ["Area"],
-      "input[type=\"image\"]": ["InputImage"]
-    }],
-    "max-len": ["error", {"code": 1200}]
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
+    ],
+    "jsx-a11y/alt-text": [
+      2,
+      {
+        "elements": ["img", "object", "area", "input[type=\"image\"]"],
+        "img": ["Image"],
+        "object": ["Object"],
+        "area": ["Area"],
+        "input[type=\"image\"]": ["InputImage"]
+      }
+    ],
+    "react/jsx-props-no-spreading": [
+      1,{
+        "explicitSpread": "ignore"
+      }
+    ],
+    "max-len": ["error", { "code": 1200 }]
   }
 }
