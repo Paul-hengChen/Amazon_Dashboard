@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <div className="p-3 h-12 flex w-full z-10 sticky top-0 bg-teal-600 space-x-10 justify-center">
       <RangeCalendar onChange={onDateChange} />
-      <Title text="Amazon_Dashboard" />
+      <Title text="Amazon Dashboard" />
       <Select options={AREA_OPTIONS} onChange={onAreaChange} value={area} />
       <Button icon={<ExportOutlined />} text="匯出" type="primary" size="large" />
     </div>

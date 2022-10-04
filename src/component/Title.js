@@ -1,10 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-const Title = ({ text }) => <div className=" self-center text-xl text-white">{text}</div>;
+const Title = ({ text, className }) => {
+  const classnames = classNames(className, 'self-center text-[36px] text-white');
+  return <div className={classnames}>{text}</div>;
+};
 
 Title.propTypes = {
   text: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default Title;
