@@ -7,10 +7,13 @@ import { Button as AntdButton } from 'antd';
 const Button = ({
   icon, size, type, onClick, text, className,
 }) => {
-  const classnames = classNames(className, 'w-15');
+  const classnames = classNames(className, 'items-center space-x-2 flex w-15 justify-between');
   return (
-    <AntdButton type={type} icon={icon} size={size} onClick={onClick} classNames={classnames}>
-      {text}
+    <AntdButton type={type} size={size} onClick={onClick}>
+      <div className={classnames}>
+        {icon && icon}
+        {text}
+      </div>
     </AntdButton>
   );
 };
