@@ -27,6 +27,22 @@ const Chart = ({ title }) => {
       },
     },
 
+    xAxis: {
+      accessibility: { rangeDescription: '' },
+      labels: {
+        autoRotationLimit: 30,
+        style: {
+          fontWeight: '600',
+        },
+      },
+      crosshair: { dashStyle: 'LongDash', width: 1, color: '#96a2b5' },
+      startOnTick: true,
+    },
+
+    yAxis: {
+      title: { enabled: false },
+    },
+
     series: [{
       type: 'column',
       name: 'Installation & Developers',

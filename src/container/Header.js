@@ -19,7 +19,7 @@ const Header = () => {
       <Title text="Amazon Dashboard" className="text-white mx-6" />
       <Select options={AREA_OPTIONS} onChange={onAreaChange} value={area} />
       <div className=" absolute right-4">
-        <Button icon={<ExportOutlined />} text="匯出" type="primary" size="small" />
+        <Button icon={<div className="mr-2"><ExportOutlined /></div>} text="匯出" type="primary" size="small" />
       </div>
     </div>
 
