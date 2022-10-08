@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const OverviewCard = ({ title, value }) => (
-  <div className="min-w-[150px] h-32 border border-solid rounded p-3">
+  <div className="min-w-[150px] h-32  border-2 border-solid border-black rounded p-3">
     <div className="text-xl">{title}</div>
     <div className=" text-[36px]">
       {value}
