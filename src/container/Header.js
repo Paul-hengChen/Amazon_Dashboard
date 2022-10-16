@@ -14,7 +14,7 @@ const Header = () => {
   const onAreaChange = (value) => setArea(value);
 
   return (
-    <div className="p-3 h-12 flex w-full z-10 sticky top-0 bg-black justify-center">
+    <div className="Header z-10 sticky top-0 bg-black justify-center">
       <RangeCalendar onChange={onDateChange} />
       <Title text="Amazon Dashboard" className="text-white mx-6" />
       <Select options={AREA_OPTIONS} onChange={onAreaChange} value={area} />
