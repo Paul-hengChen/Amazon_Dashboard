@@ -14,17 +14,18 @@ const Header = () => {
   const onAreaChange = (value) => setArea(value);
 
   return (
-    <div className="p-3 h-12 flex w-full z-10 sticky top-0  bg-black justify-center ">
+    <div className="p-3 h-12 flex w-full z-10 sticky top-0 bg-black justify-center">
       <RangeCalendar onChange={onDateChange} />
       <Title text="Amazon Dashboard" className="text-white mx-6" />
       <Select options={AREA_OPTIONS} onChange={onAreaChange} value={area} />
-      <div className=" absolute right-4">
-        <Dropdown items={EXPORT_OPTIONS}>
+      <Dropdown items={EXPORT_OPTIONS}>
+        <div className="absolute right-4">
           <Button icon={<div className="mr-2"><ExportOutlined /></div>} text="匯出" type="primary" size="small" />
-        </Dropdown>
-      </div>
+        </div>
+      </Dropdown>
     </div>
 
   );
 };
+
 export default Header;

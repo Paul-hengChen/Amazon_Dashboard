@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './Header';
 import { Chart } from '../component';
 import OverviewCardSegment from './OverviewCardSegment';
 
@@ -14,9 +13,8 @@ const mockDetails = [
   { key: 8, title: '平均客單價', value: '14.07' },
 ];
 
-const AmazonDashboard = () => (
+const AmazonDashboardPage = () => (
   <>
-    <Header />
     <OverviewCardSegment details={mockDetails} />
     <div className="grid grid-cols-2 p-3">
       <Chart title="營業額" />
@@ -30,4 +28,4 @@ const AmazonDashboard = () => (
   </>
 );
 
-export default AmazonDashboard;
+export default AmazonDashboardPage;
