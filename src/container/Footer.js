@@ -1,9 +1,13 @@
 import React from 'react';
-import { Title } from '../component';
+import { CopyrightOutlined } from '@ant-design/icons';
 
 const Footer = () => (
-  <div className="Footer z-10 sticky bottom-0 bg-black justify-center">
-    <Title text="Amazon Dashboard" className="text-white mx-6" />
+  <div className="Footer z-10 sticky bottom-0 justify-center bg-gray-100">
+    <div className="mx-6 flex items-center">
+      Copyright
+      <CopyrightOutlined className="mx-1" />
+      2022 NeuroBonic Inc.
+    </div>
   </div>
 );
 
