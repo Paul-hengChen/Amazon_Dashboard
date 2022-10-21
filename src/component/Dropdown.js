@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const Dropdown = ({
-  children, items, placement, overlayClassName,
+  children, items, placement, overlayClassName, onClick,
 }) => {
-  console.log({ items });
   const menu = () => (
-    <Menu items={items} />
+    <Menu items={items} onClick={({ key }) => onClick(key)} />
   );
   const overlayClassNames = classNames('z-20 w-32', overlayClassName);
 
@@ -28,6 +27,7 @@ Dropdown.propTypes = {
   })),
   placement: PropTypes.string,
   overlayClassName: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Dropdown;
