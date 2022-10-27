@@ -1,27 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './style/app.scss';
 import './style/tailwindcss.css';
 import 'animate.css';
 import 'antd/dist/antd.css';
-import {
-  AmazonDashboardPage, Header, Footer, CSVModal, ERPModal,
-} from './container';
+import { AmazonDashboardPage, Header, Footer } from './container';
 
-const App = () => {
-  const [modalOpen, setModalOpen] = useState('');
-  const onDropdownClick = (key) => setModalOpen(key);
-
-  return (
-    <div className="App">
-      <Header onDropdownClick={onDropdownClick} />
-      <div className="pc-container">
-        <AmazonDashboardPage />
-        <Footer />
-      </div>
-      <ERPModal isOpen={modalOpen === 'ERP'} onCancel={() => setModalOpen('')} />
-      <CSVModal isOpen={modalOpen === 'CSV'} onCancel={() => setModalOpen('')} />
+const App = () => (
+  <div className="App">
+    <Header />
+    <div className="pc-container">
+      <AmazonDashboardPage />
+      <Footer />
     </div>
-  );
-};
+  </div>
+);
 
 export default App;
