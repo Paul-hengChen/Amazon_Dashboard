@@ -3,11 +3,34 @@
     "Liberation Mono", "Courier New", monospace;
   width: 100%;
 
-  .Header, .Footer {
+  .Header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 48px;
+    display: flex;
+    padding: 12px;
+  }
+
+  .pc-container {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    position: fixed;
+    top: 2em;
+    width: 100vw;
+    height: calc(100vh - 4em);
+    overflow-y: auto;
+    overflow-x: auto;
+  }
+
+  .Footer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
     padding: 12px;
     height: 48px;
     display: flex;
-    width: 100%;
   }
 }
 

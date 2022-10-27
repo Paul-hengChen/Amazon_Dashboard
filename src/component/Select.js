@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Select as AntdSelect } from 'antd';
 
 const Select = ({
-  onChange, onSearch, options = [], value, defaultValue,
+  onChange, onSearch, options = [], value, defaultValue, size, className,
 }) => (
   <AntdSelect
     showSearch
@@ -13,14 +13,16 @@ const Select = ({
     value={value}
     defaultValue={defaultValue}
     filterOption={(input, option) => (option.children).toLowerCase().includes(input.toLowerCase())}
-    size="small"
-    className="w-[120px]"
+    size={size}
+    className={className}
   >
     {!!options?.length && options.map((option) => <AntdSelect.Option value={option.value}>{option.label}</AntdSelect.Option>)}
   </AntdSelect>
 );
 
 Select.propTypes = {
+  className: PropTypes.string,
+  size: PropTypes.string,
   onChange: PropTypes.func,
   onSearch: PropTypes.func,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),

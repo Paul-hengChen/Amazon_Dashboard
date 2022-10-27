@@ -1,6 +1,7 @@
 import React from 'react';
 import { Chart } from '../component';
 import OverviewCardSegment from './OverviewCardSegment';
+import FilterBar from './FilterBar';
 
 const mockDetails = [
   { key: 1, title: '時間', value: 'M9' },
@@ -15,6 +16,7 @@ const mockDetails = [
 
 const AmazonDashboardPage = () => (
   <>
+    <FilterBar />
     <OverviewCardSegment details={mockDetails} />
     <div className="grid grid-cols-2 p-3">
       <Chart title="營業額" />

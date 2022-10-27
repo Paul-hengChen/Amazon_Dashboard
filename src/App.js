@@ -14,8 +14,10 @@ const App = () => {
   return (
     <div className="App">
       <Header onDropdownClick={onDropdownClick} />
-      <AmazonDashboardPage />
-      <Footer />
+      <div className="pc-container">
+        <AmazonDashboardPage />
+        <Footer />
+      </div>
       <ERPModal isOpen={modalOpen === 'ERP'} onCancel={() => setModalOpen('')} />
       <CSVModal isOpen={modalOpen === 'CSV'} onCancel={() => setModalOpen('')} />
     </div>
