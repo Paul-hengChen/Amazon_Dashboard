@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style/tailwind-pre-build.css';
 import App from './App';
+
+import './style/tailwind-pre-build.css';
+import './style/app.scss';
+import './style/tailwindcss.css';
+import 'antd/dist/antd.css';
 
 const { worker } = require('./mocks/browser');
 

@@ -22,6 +22,7 @@ const AmazonDashboardPage = () => {
   };
 
   return (
+
     <>
       <FilterBar onDropdownClick={onDropdownClick} />
       <OverviewCardSegment details={mockDetails} />
@@ -34,8 +35,8 @@ const AmazonDashboardPage = () => {
         <Chart title="產品銷售金額 TOP 10" />
         <Chart title="產品銷售數量 TOP 10" />
       </div>
-      <ERPModal isOpen={modalOpen === 'ERP'} onCancel={() => setModalOpen('')} />
-      <CSVModal isOpen={modalOpen === 'CSV'} onCancel={() => setModalOpen('')} />
+      <ERPModal isOpen={modalOpen === 'ERP'} onCancel={() => setModalOpen('')} id="modal" />
+      <CSVModal isOpen={modalOpen === 'CSV'} onCancel={() => setModalOpen('')} id="modal" />
     </>
   );
 };

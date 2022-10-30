@@ -11,6 +11,7 @@
     height: 48px;
     display: flex;
     padding: 12px;
+    z-index: 10;
   }
 
   .pc-container {
@@ -22,6 +23,7 @@
     height: calc(100vh - 4em);
     overflow-y: auto;
     overflow-x: auto;
+    z-index: 10;
   }
 
   .Footer {
@@ -31,6 +33,7 @@
     padding: 12px;
     height: 48px;
     display: flex;
+    z-index: 10;
   }
 }
 
