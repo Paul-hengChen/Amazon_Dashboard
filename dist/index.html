@@ -3,6 +3,15 @@
 <script defer src="bundle.js"></script></head>
 <body>
     <div id="root"></div>
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/mockServiceWorker.js');
+            });
+        }
+     </script>
     <script src="../dist/bundle.js"></script>
 </body>
 </html>

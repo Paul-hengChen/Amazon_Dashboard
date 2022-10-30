@@ -1,6 +1,6 @@
-/* eslint-disable no-var */
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -45,13 +45,23 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, './dist', 'mockServiceWorker.js'), to: 'mockServiceWorker.js' },
+      ],
+    }),
   ],
-  performance: {
-    hints: 'warning',
-    maxEntrypointSize: 50000000,
-    maxAssetSize: 30000000,
-    assetFilter(assetFilename) {
-      return assetFilename.endsWith('.js');
-    },
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
   },
+  // performance: {
+  //   hints: 'warning',
+  //   maxEntrypointSize: 50000000,
+  //   maxAssetSize: 30000000,
+  //   assetFilter(assetFilename) {
+  //     return assetFilename.endsWith('.js');
+  //   },
+  // },
 };
