@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -50,7 +51,16 @@ module.exports = {
         { from: path.resolve(__dirname, './dist', 'mockServiceWorker.js'), to: 'mockServiceWorker.js' },
       ],
     }),
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+    }),
   ],
+
+  resolve: {
+    fallback: {
+      buffer: require.resolve('buffer/'),
+    },
+  },
   optimization: {
     removeAvailableModules: false,
     removeEmptyChunks: false,

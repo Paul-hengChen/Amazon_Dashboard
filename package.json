@@ -8,6 +8,8 @@
     "antd": "^4.23.6",
     "classnames": "^2.3.2",
     "copy-webpack-plugin": "^11.0.0",
+    "csv-parse": "^5.3.1",
+    "webpack": "^5.74.0",
     "highcharts": "^10.2.1",
     "highcharts-react-official": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
@@ -18,6 +20,7 @@
     "react-dom": "^18.1.0",
     "react-redux": "^8.0.2",
     "react-scripts": "5.0.1",
+    "stream": "^0.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -50,6 +53,7 @@
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
     "babel-loader": "^8.2.5",
+    "buffer": "^6.0.3",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
     "eslint": "^8.18.0",
@@ -75,5 +79,10 @@
   },
   "msw": {
     "workerDirectory": "dist"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }
