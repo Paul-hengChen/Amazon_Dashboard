@@ -4,8 +4,7 @@ import { AmazonDashboardPage, Header, Footer } from './container';
 const App = () => {
   useEffect(() => {
     (async () => {
-      const data = await fetch('/amazon/dashboard/overview');
-      console.log({ data });
+      await fetch('/amazon/dashboard/overview');
     })();
   }, []);
 
