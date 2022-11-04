@@ -1,9 +1,8 @@
-export const readFile = (path) => {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', path, false);
-  xhr.addEventListener('load', () => {
-    if (xhr.status !== 200 || xhr.status !== 0) return;
-    document.write(xhr.responseText);
-  });
-  xhr.send();
+export const parseSearch = (search) => {
+  const searchParams = new URLSearchParams(search);
+  let query = {};
+  for (const param of searchParams.entries()) {
+    query = { ...query, [param[0]]: param[1] };
+  }
+  return query;
 };

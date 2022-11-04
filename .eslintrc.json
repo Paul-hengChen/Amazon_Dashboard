@@ -3,7 +3,10 @@
     "browser": true,
     "node": true
   },
-  "extends": ["plugin:react/recommended", "airbnb"],
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -11,9 +14,19 @@
     },
     "ecmaVersion": "latest"
   },
-  "plugins": ["react"],
+  "plugins": [
+    "react"
+  ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
     "react/function-component-definition": [
       "error",
       {
@@ -33,11 +46,24 @@
     "jsx-a11y/alt-text": [
       2,
       {
-        "elements": ["img", "object", "area", "input[type=\"image\"]"],
-        "img": ["Image"],
-        "object": ["Object"],
-        "area": ["Area"],
-        "input[type=\"image\"]": ["InputImage"]
+        "elements": [
+          "img",
+          "object",
+          "area",
+          "input[type=\"image\"]"
+        ],
+        "img": [
+          "Image"
+        ],
+        "object": [
+          "Object"
+        ],
+        "area": [
+          "Area"
+        ],
+        "input[type=\"image\"]": [
+          "InputImage"
+        ]
       }
     ],
     "react/jsx-props-no-spreading": [
@@ -46,7 +72,25 @@
         "explicitSpread": "ignore"
       }
     ],
-    "react/forbid-prop-types": [1, { "forbid": ["object"] }],
-    "max-len": ["error", { "code": 1200 }]
+    "react/forbid-prop-types": [
+      1,
+      {
+        "forbid": [
+          "object"
+        ]
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 1200
+      }
+    ],
+    "no-restricted-syntax": [
+      "error",
+      "FunctionExpression",
+      "WithStatement",
+      "BinaryExpression[operator='in']"
+    ]
   }
 }
