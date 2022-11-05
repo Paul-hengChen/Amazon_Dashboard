@@ -1,31 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// import moment from 'moment';
 import { Chart } from '../component';
 import OverviewCardSegment from './OverviewCardSegment';
 import FilterBar from './FilterBar';
 import { CSVModal, ERPModal } from './Modal';
 
-const mockDetails = [
-  { key: 1, title: '時間', value: 'M9' },
-  { key: 2, title: '銷售金額', value: '28103.66' },
-  { key: 3, title: '相關平台費用', value: '8309.88' },
-  { key: 4, title: '平均購買數量', value: '7.07' },
-  { key: 5, title: '銷售數量', value: '1070' },
-  { key: 6, title: '營業收入', value: '9037.55' },
-  { key: 7, title: '購買人次', value: '999' },
-  { key: 8, title: '平均客單價', value: '14.07' },
-];
-
 const AmazonDashboardPage = () => {
   const [modalOpen, setModalOpen] = useState('');
+
   const onDropdownClick = (key) => {
     setModalOpen(key);
   };
 
-  return (
+  // const [startDate, setStartDate] = useState(new Date());
+  // const [endDate, setEndDate] = useState(new Date());
 
+  const onDateChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
+
+  const [area, setArea] = useState('US');
+  const onAreaChange = (value) => setArea(value);
+
+  const [details, setDetails] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const res = await fetch('/amazon/dashboard/overview?startDate=2022/08/01&&endDate=2022/08/05');
+      const data = await res.json();
+      setDetails(data);
+    })();
+  }, []);
+
+  return (
     <>
-      <FilterBar onDropdownClick={onDropdownClick} />
-      <OverviewCardSegment details={mockDetails} />
+      <FilterBar
+        onDropdownClick={onDropdownClick}
+        onDateChange={onDateChange}
+        onAreaChange={onAreaChange}
+        area={area}
+      />
+      <OverviewCardSegment details={details} />
       <div className="grid grid-cols-2 p-3">
         <Chart title="營業額" />
         <Chart title="銷售數量" />
