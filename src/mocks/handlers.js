@@ -1,4 +1,5 @@
 import { rest } from 'msw';
+import moment from 'moment';
 import { parseSearch } from './utils';
 import { DATA_202209, DATA_202208 } from './mockData';
 
@@ -21,11 +22,9 @@ export const handlers = [
     // eslint-disable-next-line prefer-const
     let { startDate, endDate } = parseSearch(req.url.search);
     if (startDate === endDate) {
-      startDate = `${startDate} 00:00:00`;
-      endDate = `${endDate} 23:59:59`;
+      startDate = `${moment(new Date(startDate)).format('YYYY-MM-DD')} 00:00`;
+      endDate = `${moment(new Date(endDate)).format('YYYY-MM-DD')} 23:59`;
     }
-    console.log({ startDate, endDate });
-    console.log(new Date(startDate), new Date(endDate));
 
     const filterData = rawData.filter(({ date }) => date >= new Date(startDate) && date <= new Date(endDate));
 

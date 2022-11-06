@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
 import { Chart } from '../../component';
 import OverviewCardSegment from '../OverviewCardSegment';
 import FilterBar from './FilterBar';
@@ -12,13 +11,13 @@ const AmazonDashboardPage = () => {
     setModalOpen(key);
   };
 
-  const [startDate, setStartDate] = useState(moment(new Date(), 'YYYY/MM/DD'));
-  const [endDate, setEndDate] = useState(moment(new Date(), 'YYYY/MM/DD'));
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   // eslint-disable-next-line no-shadow
   const onDateChange = ({ startDate, endDate }) => {
-    setStartDate(moment(startDate, 'YYYY/MM/DD'));
-    setEndDate(moment(endDate, 'YYYY/MM/DD'));
+    setStartDate(new Date(startDate));
+    setEndDate(new Date(endDate));
   };
 
   const [area, setArea] = useState('US');
@@ -27,7 +26,7 @@ const AmazonDashboardPage = () => {
   const [details, setDetails] = useState([]);
   useEffect(() => {
     (async () => {
-      const res = await fetch(`/amazon/dashboard/overview?startDate=${startDate}&&endDate=${endDate}`);
+      const res = await fetch(`/amazon/dashboard/overview?startDate=${startDate}&endDate=${endDate}`);
       const data = await res.json();
       setDetails(data);
     })();

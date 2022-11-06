@@ -1,3 +1,5 @@
+/* eslint-disable no-redeclare */
+
 export const parseSearch = (search) => {
   const searchParams = new URLSearchParams(search);
   let query = {};
