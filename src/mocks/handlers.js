@@ -55,7 +55,7 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        ...totalOfItems, avgPurchase, numberOfPurchase, avgProductSales,
+        ...totalOfItems, avgPurchase, numberOfPurchase, avgProductSales, filterData,
       }),
     );
   }),

@@ -5,19 +5,24 @@ import moment from 'moment';
 
 const { RangePicker } = DatePicker;
 
-const RangeCalendar = ({ onChange, value }) => (
-  <RangePicker
-    onChange={onChange}
-    defaultValue={[moment(new Date(), 'DD/MM/YYYY'), moment(new Date(), 'DD/MM/YYYY')]}
-    format="YYYY-MM-DD"
-    allowClear={false}
-    size="large"
-    value={value}
-  />
-);
+const RangeCalendar = ({ onChange }) => {
+  const onDateChange = (_, dateString) => {
+    const startDate = dateString[0];
+    const endDate = dateString[1];
+    onChange({ startDate, endDate });
+  };
+  return (
+    <RangePicker
+      onChange={onDateChange}
+      defaultValue={[moment(new Date(), 'YYYY/MM/DD'), moment(new Date(), 'YYYY/MM/DD')]}
+      format="YYYY-MM-DD"
+      allowClear={false}
+      size="large"
+    />
+  );
+};
 
 RangeCalendar.propTypes = {
   onChange: PropTypes.func,
-  value: PropTypes.string,
 };
 export default RangeCalendar;

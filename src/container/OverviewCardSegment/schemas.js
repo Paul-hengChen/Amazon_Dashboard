@@ -11,7 +11,9 @@ export const buildContent = (data) => {
   const content = schemas.map((schema) => ({
     ...schema,
     title: schema.title,
-    value: typeof data[schema.index] === 'number' ? Math.abs(data[schema.index].toFixed(2)) : data[schema.index],
+    // eslint-disable-next-line no-nested-ternary
+    value: typeof data[schema.index] === 'number' ? Math.abs(data[schema.index].toFixed(2))
+      : data[schema.index] ? data[schema.index] : '-',
   }));
   return content;
 };

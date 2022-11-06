@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import moment from 'moment';
+import moment from 'moment';
 import { Chart } from '../component';
 import OverviewCardSegment from './OverviewCardSegment';
 import FilterBar from './FilterBar';
@@ -12,11 +12,13 @@ const AmazonDashboardPage = () => {
     setModalOpen(key);
   };
 
-  // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(moment(new Date(), 'YYYY/MM/DD'));
+  const [endDate, setEndDate] = useState(moment(new Date(), 'YYYY/MM/DD'));
 
-  const onDateChange = (date, dateString) => {
-    console.log(date, dateString);
+  // eslint-disable-next-line no-shadow
+  const onDateChange = ({ startDate, endDate }) => {
+    setStartDate(moment(startDate, 'YYYY/MM/DD'));
+    setEndDate(moment(endDate, 'YYYY/MM/DD'));
   };
 
   const [area, setArea] = useState('US');
@@ -25,11 +27,11 @@ const AmazonDashboardPage = () => {
   const [details, setDetails] = useState([]);
   useEffect(() => {
     (async () => {
-      const res = await fetch('/amazon/dashboard/overview?startDate=2022/08/01&&endDate=2022/08/05');
+      const res = await fetch(`/amazon/dashboard/overview?startDate=${startDate}&&endDate=${endDate}`);
       const data = await res.json();
       setDetails(data);
     })();
-  }, []);
+  }, [startDate, endDate]);
 
   return (
     <>
