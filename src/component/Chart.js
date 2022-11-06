@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const Chart = ({ title, series }) => {
+const Chart = ({ dataset }) => {
   const options = {
     title: {
-      text: title,
+      text: dataset.name,
       style: { fontSize: '24px' },
     },
     credits: {
@@ -18,6 +18,12 @@ const Chart = ({ title, series }) => {
         label: {
           connectorAllowed: false,
         },
+        pointWidth: 20,
+        color: dataset.color,
+      },
+      column: {
+        pointPadding: 0.2,
+        borderWidth: 1,
       },
     },
     exporting: {
@@ -29,16 +35,22 @@ const Chart = ({ title, series }) => {
     },
 
     xAxis: {
+      categories: dataset.label,
       accessibility: { rangeDescription: '' },
+      crosshair: true,
     },
 
     yAxis: {
       title: { enabled: false },
     },
+    tooltip: {
+      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+      footerFormat: '</table>',
+      shared: true,
+      useHTML: true,
+    },
 
-    series: [{
-      ...series,
-    }],
+    series: [{ ...dataset }],
 
   };
 
@@ -53,8 +65,7 @@ const Chart = ({ title, series }) => {
 };
 
 Chart.propTypes = {
-  title: PropTypes.string,
-  series: PropTypes.object,
+  dataset: PropTypes.object,
 };
 
 export default Chart;

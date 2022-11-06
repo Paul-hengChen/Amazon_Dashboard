@@ -12,8 +12,8 @@ const AmazonDashboardPage = () => {
     setModalOpen(key);
   };
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date('2022-08-01'));
+  const [endDate, setEndDate] = useState(new Date('2022-08-30'));
 
   // eslint-disable-next-line no-shadow
   const onDateChange = ({ startDate, endDate }) => {
@@ -48,7 +48,7 @@ const AmazonDashboardPage = () => {
       />
       <OverviewCardSegment details={overview} />
       <div className="grid grid-cols-2 p-3">
-        {dashboards.map((dashboard) => <Chart title={dashboard.title} series={dashboard} />)}
+        {dashboards.map((dashboard) => <Chart dataset={dashboard} />)}
       </div>
       <ERPModal isOpen={modalOpen === 'ERP'} onCancel={() => setModalOpen('')} id="modal" />
       <CSVModal isOpen={modalOpen === 'CSV'} onCancel={() => setModalOpen('')} id="modal" />

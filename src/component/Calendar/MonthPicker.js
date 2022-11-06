@@ -4,7 +4,7 @@ import moment from 'moment';
 import { DatePicker as AntdDatePicker } from 'antd';
 import { getDaysInMonth } from 'date-fns';
 
-const MonthPicker = ({ onChange }) => {
+const MonthPicker = ({ onChange, defaultValue }) => {
   const onDateChange = (_, dateString) => {
     const lastDay = getDaysInMonth(new Date(dateString));
     const startDate = `${moment(new Date(dateString)).format('YYYY-MM')}-01`;
@@ -15,12 +15,13 @@ const MonthPicker = ({ onChange }) => {
     <AntdDatePicker
       onChange={onDateChange}
       picker="month"
-      defaultValue={moment(new Date(), 'YYYY-MM')}
+      defaultValue={defaultValue}
     />
   );
 };
 
 MonthPicker.propTypes = {
   onChange: PropTypes.func,
+  defaultValue: PropTypes.string,
 };
 export default MonthPicker;
