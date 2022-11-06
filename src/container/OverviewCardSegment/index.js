@@ -8,7 +8,7 @@ const OverviewCardSegment = ({ details }) => {
   return (
     <div className="m-3 flex space-x-2">
       {content?.map((detail) => (
-        <Card title={detail.title} key={detail.key}>
+        <Card title={detail.title} key={detail.key} style={{ width: '200px' }}>
           {detail.value}
         </Card>
       ))}

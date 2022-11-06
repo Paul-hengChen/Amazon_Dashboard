@@ -14,7 +14,7 @@ const RangeCalendar = ({ onChange }) => {
   return (
     <RangePicker
       onChange={onDateChange}
-      defaultValue={[moment(new Date(), 'YYYY/MM/DD'), moment(new Date(), 'YYYY/MM/DD')]}
+      defaultValue={[moment(new Date()), moment(new Date())]}
       format="YYYY-MM-DD"
       allowClear={false}
       size="large"

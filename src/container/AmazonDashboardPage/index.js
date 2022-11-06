@@ -24,13 +24,21 @@ const AmazonDashboardPage = () => {
   const onAreaChange = (value) => setArea(value);
 
   const [details, setDetails] = useState([]);
+  const [dashboardContent, setDashboardContent] = useState([]);
+
   useEffect(() => {
     (async () => {
-      const res = await fetch(`/amazon/dashboard/overview?startDate=${startDate}&endDate=${endDate}`);
-      const data = await res.json();
-      setDetails(data);
+      const res_overview = await fetch(`/amazon/dashboard/overview?startDate=${startDate}&endDate=${endDate}`);
+      const overview = await res_overview.json();
+
+      const res_dashboard = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}`);
+      const dashboard = await res_dashboard.json();
+      setDetails(overview);
+      setDashboardContent(dashboard);
     })();
   }, [startDate, endDate]);
+
+  console.log({ dashboardContent });
 
   return (
     <>

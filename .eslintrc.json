@@ -18,6 +18,7 @@
     "react"
   ],
   "rules": {
+    "camelcase": "off",
     "react/jsx-filename-extension": [
       1,
       {

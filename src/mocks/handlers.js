@@ -3,22 +3,10 @@ import moment from 'moment';
 import { parseSearch } from './utils';
 import { DATA_202209, DATA_202208 } from './mockData';
 
+const RAW_DATA = [...DATA_202208, ...DATA_202209].map((file) => ({ ...file, date: new Date(file.date) }));
+
 export const handlers = [
-  rest.get('/amazon/dashboard', (req, res, ctx) => {
-    const rawData = [...DATA_202208, ...DATA_202209].map((file) => ({ ...file, date: new Date(file.date) }));
-    const { startDate, endDate } = parseSearch(req.url.search);
-    const filterData = rawData.filter(({ date }) => date >= new Date(startDate) && date <= new Date(endDate));
-
-    return res(
-      ctx.status(200),
-      ctx.json({
-        filterData,
-      }),
-    );
-  }),
-
   rest.get('/amazon/dashboard/overview', (req, res, ctx) => {
-    const rawData = [...DATA_202208, ...DATA_202209].map((file) => ({ ...file, date: new Date(file.date) }));
     // eslint-disable-next-line prefer-const
     let { startDate, endDate } = parseSearch(req.url.search);
     if (startDate === endDate) {
@@ -26,7 +14,7 @@ export const handlers = [
       endDate = `${moment(new Date(endDate)).format('YYYY-MM-DD')} 23:59`;
     }
 
-    const filterData = rawData.filter(({ date }) => date >= new Date(startDate) && date <= new Date(endDate));
+    const filterData = RAW_DATA.filter(({ date }) => date >= new Date(startDate) && date <= new Date(endDate));
 
     const totalOfItems = filterData.reduce((acc, cur) => {
       const quantity = acc.quantity + cur.quantity;
@@ -62,6 +50,31 @@ export const handlers = [
       ctx.status(200),
       ctx.json({
         ...totalOfItems, avgPurchase, numberOfPurchase, avgProductSales, filterData,
+      }),
+    );
+  }),
+
+  rest.get('/amazon/dashboard', (req, res, ctx) => {
+    let { startDate, endDate } = parseSearch(req.url.search);
+    if (startDate === endDate) {
+      startDate = `${moment(new Date(startDate)).format('YYYY-MM-DD')} 00:00`;
+      endDate = `${moment(new Date(endDate)).format('YYYY-MM-DD')} 23:59`;
+    }
+    const filterData = RAW_DATA.filter(({ date }) => date >= new Date(startDate) && date <= new Date(endDate));
+
+    const diff = Number(new Date(startDate).getMonth()) - Number(new Date(endDate).getMonth());
+    console.log(diff, new Date(startDate).getMonth());
+    // const total = filterData.reduce((acc) => {
+    //   const title = '營業收入';
+    //   const type = 'column';
+    //   const data = filterData.map((detail) => detail.total);
+    //   return { title, type, data };
+    // }, {});
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        filterData,
       }),
     );
   }),
