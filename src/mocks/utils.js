@@ -8,3 +8,10 @@ export const parseSearch = (search) => {
   }
   return query;
 };
+
+export const buildDashboardDataset = (title, type, rawData, target, name) => rawData.reduce((acc, cur) => {
+  const data = acc.data + cur[target];
+  return {
+    title, type, data, name,
+  };
+}, { title: '', type: '', data: 0 });

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const Chart = ({ title }) => {
+const Chart = ({ title, series }) => {
   const options = {
     title: {
       text: title,
@@ -37,10 +37,7 @@ const Chart = ({ title }) => {
     },
 
     series: [{
-      type: 'column',
-      name: 'Installation & Developers',
-      data: [43934, 48656, 65165, 81827, 112143, 142383,
-        171533, 165174, 155157, 161454, 154610],
+      ...series,
     }],
 
   };
@@ -57,6 +54,7 @@ const Chart = ({ title }) => {
 
 Chart.propTypes = {
   title: PropTypes.string,
+  series: PropTypes.object,
 };
 
 export default Chart;

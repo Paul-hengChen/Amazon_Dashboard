@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Chart } from '../../component';
-import OverviewCardSegment from '../OverviewCardSegment';
+import OverviewCardSegment from './OverviewCardSegment';
 import FilterBar from './FilterBar';
+import { buildChartDataset } from './schemas';
 import { CSVModal, ERPModal } from '../Modal';
 
 const AmazonDashboardPage = () => {
@@ -23,22 +24,19 @@ const AmazonDashboardPage = () => {
   const [area, setArea] = useState('US');
   const onAreaChange = (value) => setArea(value);
 
-  const [details, setDetails] = useState([]);
-  const [dashboardContent, setDashboardContent] = useState([]);
+  const [overview, setOverview] = useState([]);
+  const [dashboards, setDashboards] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const res_overview = await fetch(`/amazon/dashboard/overview?startDate=${startDate}&endDate=${endDate}`);
-      const overview = await res_overview.json();
-
-      const res_dashboard = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}`);
-      const dashboard = await res_dashboard.json();
-      setDetails(overview);
-      setDashboardContent(dashboard);
+      const res = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}`);
+      const detail = await res.json();
+      setOverview(detail);
+      // eslint-disable-next-line no-shadow
+      const dashboards = buildChartDataset(detail);
+      setDashboards(dashboards);
     })();
   }, [startDate, endDate]);
-
-  console.log({ dashboardContent });
 
   return (
     <>
@@ -48,15 +46,9 @@ const AmazonDashboardPage = () => {
         onAreaChange={onAreaChange}
         area={area}
       />
-      <OverviewCardSegment details={details} />
+      <OverviewCardSegment details={overview} />
       <div className="grid grid-cols-2 p-3">
-        <Chart title="營業額" />
-        <Chart title="銷售數量" />
-        <Chart title="購買人次" />
-        <Chart title="平均客單價" />
-        <Chart title="平均購買數量" />
-        <Chart title="產品銷售金額 TOP 10" />
-        <Chart title="產品銷售數量 TOP 10" />
+        {dashboards.map((dashboard) => <Chart title={dashboard.title} series={dashboard} />)}
       </div>
       <ERPModal isOpen={modalOpen === 'ERP'} onCancel={() => setModalOpen('')} id="modal" />
       <CSVModal isOpen={modalOpen === 'CSV'} onCancel={() => setModalOpen('')} id="modal" />
