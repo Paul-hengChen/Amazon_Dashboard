@@ -35,7 +35,7 @@ const Chart = ({ dataset }) => {
     },
 
     xAxis: {
-      categories: dataset.label,
+      categories: dataset.labels,
       accessibility: { rangeDescription: '' },
       crosshair: true,
     },
@@ -48,6 +48,16 @@ const Chart = ({ dataset }) => {
       footerFormat: '</table>',
       shared: true,
       useHTML: true,
+    },
+
+    legend: {
+      itemStyle: {
+        font: '9pt Trebuchet MS, Verdana, sans-serif',
+        color: 'black',
+      },
+      itemHoverStyle: {
+        color: 'gray',
+      },
     },
 
     series: [{ ...dataset }],

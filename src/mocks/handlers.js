@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 import moment from 'moment';
-import { parseSearch } from './utils';
+import { parseSearch, sortingFunc } from './utils';
 import { DATA_202209, DATA_202208 } from './mockData';
 
 const RAW_DATA = [...DATA_202208, ...DATA_202209].map((file) => ({ ...file, date: new Date(file.date) }));
@@ -45,10 +45,14 @@ export const handlers = [
     const avgPurchase = totalOfItems.quantity / filterData.length;
     const avgProductSales = totalOfItems.productSales / filterData.length;
     const numberOfPurchase = filterData.length;
+
+    const productSalesOfTOP10 = sortingFunc(filterData, 'productSales').slice(0, 10);
+    const quantityOfTOP10 = sortingFunc(filterData, 'quantity').slice(0, 10);
+
     return res(
       ctx.status(200),
       ctx.json({
-        ...totalOfItems, avgPurchase, numberOfPurchase, avgProductSales, filterData, currentMonth,
+        ...totalOfItems, avgPurchase, numberOfPurchase, avgProductSales, filterData, currentMonth, productSalesOfTOP10, quantityOfTOP10,
       }),
     );
   }),

@@ -38,34 +38,70 @@ export const buildOverview = (detail) => {
 
 const dashboardSchemas = [
   {
-    key: 'productSales', name: '銷售金額', index: 'productSales', type: 'column', color: '#004B97',
+    key: 'productSalesOfTOP10',
+    name: '產品銷售金額TOP10',
+    index: 'productSalesOfTOP10',
+    type: 'column',
+    color: '#004B97',
+    render: (productSalesOfTOP10) => productSalesOfTOP10.map((item) => Number(Math.abs(item.productSales.toFixed(2)))),
+    renderLabels: (productSalesOfTOP10) => productSalesOfTOP10.map((item) => item.sku ?? '-'),
   },
   {
-    key: 'platformRelatedFee', name: '相關平台費用', index: 'platformRelatedFee', type: 'column', color: '#007979',
+    key: 'quantityOfTOP10',
+    name: '產品銷售數量TOP10',
+    index: 'quantityOfTOP10',
+    type: 'column',
+    color: '#007979',
+    render: (quantityOfTOP10) => quantityOfTOP10.map((item) => Number(Math.abs(item.quantity.toFixed(2)))),
+    renderLabels: (quantityOfTOP10) => quantityOfTOP10.map((item) => item.sku ?? '-'),
   },
   {
-    key: 'avgPurchase', name: '平均購買數量', index: 'avgPurchase', type: 'column', color: '#019858',
+    key: 'avgPurchase',
+    name: '平均購買數量',
+    index: 'avgPurchase',
+    type: 'column',
+    color: '#019858',
   },
   {
-    key: 'quantity', name: '銷售數量', index: 'quantity', type: 'column', color: '#9F0050',
+    key: 'quantity',
+    name: '銷售數量',
+    index: 'quantity',
+    type: 'column',
+    color: '#9F0050',
   },
   {
-    key: 'total', name: '營業收入', index: 'total', type: 'column', color: '#750075',
+    key: 'total',
+    name: '營業額',
+    index: 'total',
+    type: 'column',
+    color: '#750075',
   },
   {
-    key: 'numberOfPurchase', name: '購買人次', index: 'numberOfPurchase', type: 'column', color: '#4B0091',
+    key: 'numberOfPurchase',
+    name: '購買人次',
+    index: 'numberOfPurchase',
+    type: 'column',
+    color: '#4B0091',
   },
   {
-    key: 'avgProductSales', name: '平均客單價', index: 'avgProductSales', type: 'column', color: '#D26900',
+    key: 'avgProductSales',
+    name: '平均客單價',
+    index: 'avgProductSales',
+    type: 'column',
+    color: '#D26900',
   }];
 
 export const buildChartDataset = (detail) => {
-  const content = dashboardSchemas.map((schema) => ({
-    ...schema,
-    name: schema.name,
-    label: [`${detail.currentMonth}月`],
-    type: schema.type,
-    data: detail[schema.index] ? [Number(Math.abs(detail[schema.index].toFixed(2)))] : [null],
-  }));
+  const content = dashboardSchemas.map((schema) => {
+    const value = schema.render ? schema.render(detail[schema.index]) : [Number(Math.abs(detail[schema.index].toFixed(2)))];
+    const labels = schema.renderLabels ? schema.renderLabels(detail[schema.index]) : [`${detail.currentMonth}月`];
+    return {
+      ...schema,
+      name: schema.name,
+      labels,
+      type: schema.type,
+      data: value,
+    };
+  });
   return content;
 };
