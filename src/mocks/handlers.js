@@ -18,7 +18,14 @@ export const handlers = [
 
   rest.get('/amazon/dashboard/overview', (req, res, ctx) => {
     const rawData = [...DATA_202208, ...DATA_202209].map((file) => ({ ...file, date: new Date(file.date) }));
-    const { startDate, endDate } = parseSearch(req.url.search);
+    // eslint-disable-next-line prefer-const
+    let { startDate, endDate } = parseSearch(req.url.search);
+    if (startDate === endDate) {
+      startDate = `${startDate} 00:00:00`;
+      endDate = `${endDate} 23:59:59`;
+    }
+    console.log({ startDate, endDate });
+    console.log(new Date(startDate), new Date(endDate));
 
     const filterData = rawData.filter(({ date }) => date >= new Date(startDate) && date <= new Date(endDate));
 

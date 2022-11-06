@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { Chart } from '../component';
-import OverviewCardSegment from './OverviewCardSegment';
+import { Chart } from '../../component';
+import OverviewCardSegment from '../OverviewCardSegment';
 import FilterBar from './FilterBar';
-import { CSVModal, ERPModal } from './Modal';
+import { CSVModal, ERPModal } from '../Modal';
 
 const AmazonDashboardPage = () => {
   const [modalOpen, setModalOpen] = useState('');

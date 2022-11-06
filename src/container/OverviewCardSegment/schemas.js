@@ -1,11 +1,11 @@
 const schemas = [
-  { key: 2, title: '銷售金額', index: 'productSales' },
-  { key: 3, title: '相關平台費用', index: 'platformRelatedFee' },
-  { key: 4, title: '平均購買數量', index: 'avgPurchase' },
-  { key: 5, title: '銷售數量', index: 'quantity' },
-  { key: 6, title: '營業收入', index: 'total' },
-  { key: 7, title: '購買人次', index: 'numberOfPurchase' },
-  { key: 8, title: '平均客單價', index: 'avgProductSales' }];
+  { key: 'productSales', title: '銷售金額', index: 'productSales' },
+  { key: 'platformRelatedFee', title: '相關平台費用', index: 'platformRelatedFee' },
+  { key: 'avgPurchase', title: '平均購買數量', index: 'avgPurchase' },
+  { key: 'quantity', title: '銷售數量', index: 'quantity' },
+  { key: 'total', title: '營業收入', index: 'total' },
+  { key: 'numberOfPurchase', title: '購買人次', index: 'numberOfPurchase' },
+  { key: 'avgProductSales', title: '平均客單價', index: 'avgProductSales' }];
 
 export const buildContent = (data) => {
   const content = schemas.map((schema) => ({

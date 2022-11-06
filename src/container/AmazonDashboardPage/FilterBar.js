@@ -1,10 +1,10 @@
 import React from 'react';
 import { ExportOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
-import { AREA_OPTIONS, EXPORT_OPTIONS } from '../constants';
+import { AREA_OPTIONS, EXPORT_OPTIONS } from '../../constants';
 import {
   RangeCalendar, Select, Button, Dropdown,
-} from '../component';
+} from '../../component';
 
 const FilterBar = ({
   onDropdownClick, onDateChange, onAreaChange, area,

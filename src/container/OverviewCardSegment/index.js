@@ -7,7 +7,11 @@ const OverviewCardSegment = ({ details }) => {
   const content = buildContent(details);
   return (
     <div className="m-3 flex space-x-2">
-      {content?.map((detail) => <Card title={detail.title}>{detail.value}</Card>)}
+      {content?.map((detail) => (
+        <Card title={detail.title} key={detail.key}>
+          {detail.value}
+        </Card>
+      ))}
     </div>
   );
 };
