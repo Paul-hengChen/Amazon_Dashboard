@@ -6,10 +6,20 @@ import { Card } from '../../component';
 const OverviewCardSegment = ({ details }) => {
   const content = buildOverview(details);
   return (
-    <div className="m-3 flex space-x-2">
-      {content?.map((detail) => (
-        <Card title={detail.title} key={detail.key} style={{ width: '200px' }}>
-          {detail.value}
+    <div className="m-3 flex space-x-4">
+      {content?.map(({
+        title, key, value, Svg,
+      }) => (
+        <Card key={key} style={{ 'max-width': '250px', 'border-radius': '16px', 'box-shadow': 'rgba(0, 0, 0, 0.35) 1px 5px 5px' }} bordered>
+          <div className="flex">
+            <div>
+              <div className="text-lg font-medium">{title}</div>
+              <p className="text-xl">{value}</p>
+            </div>
+            <div className="mx-3 self-center text-[24px]">
+              <Svg />
+            </div>
+          </div>
         </Card>
       ))}
     </div>

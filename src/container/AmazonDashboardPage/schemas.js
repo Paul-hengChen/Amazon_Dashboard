@@ -1,27 +1,32 @@
+import React from 'react';
+import {
+  ClockCircleTwoTone, ShopTwoTone, DollarCircleTwoTone, ShoppingTwoTone, FireTwoTone,
+} from '@ant-design/icons';
+
 const overviewSchemas = [
   {
-    key: 'currentMonth', title: '時間', index: 'currentMonth', render: (currentMonth) => `${currentMonth}月`,
+    key: 'currentMonth', title: '時間', index: 'currentMonth', render: (currentMonth) => `${currentMonth}月`, Svg: () => <ClockCircleTwoTone />,
   },
   {
-    key: 'productSales', title: '銷售金額', index: 'productSales', render: (productSales) => Math.abs(productSales).toFixed(2),
+    key: 'productSales', title: '銷售金額', index: 'productSales', render: (productSales) => `$${Math.abs(productSales).toFixed(2)}`, Svg: () => <DollarCircleTwoTone />,
   },
   {
-    key: 'platformRelatedFee', title: '相關平台費用', index: 'platformRelatedFee', render: (platformRelatedFee) => Math.abs(platformRelatedFee).toFixed(2),
+    key: 'platformRelatedFee', title: '相關平台費用', index: 'platformRelatedFee', render: (platformRelatedFee) => `$${Math.abs(platformRelatedFee).toFixed(2)}`, Svg: () => <ShoppingTwoTone />,
   },
   {
-    key: 'avgPurchase', title: '平均購買數量', index: 'avgPurchase', render: (avgPurchase) => Math.abs(avgPurchase).toFixed(2),
+    key: 'avgPurchase', title: '平均購買數量', index: 'avgPurchase', render: (avgPurchase) => Math.abs(avgPurchase).toFixed(2), Svg: () => <FireTwoTone />,
   },
   {
-    key: 'quantity', title: '銷售數量', index: 'quantity', render: (quantity) => Math.abs(quantity).toFixed(2),
+    key: 'quantity', title: '銷售數量', index: 'quantity', render: (quantity) => Math.abs(quantity).toFixed(2), Svg: () => <FireTwoTone />,
   },
   {
-    key: 'total', title: '營業收入', index: 'total', render: (total) => Math.abs(total).toFixed(2),
+    key: 'total', title: '營業收入', index: 'total', render: (total) => `$${Math.abs(total).toFixed(2)}`, Svg: () => <ShopTwoTone />,
   },
   {
-    key: 'numberOfPurchase', title: '購買人次', index: 'numberOfPurchase', render: (numberOfPurchase) => Math.abs(numberOfPurchase).toFixed(2),
+    key: 'numberOfPurchase', title: '購買人次', index: 'numberOfPurchase', render: (numberOfPurchase) => Math.abs(numberOfPurchase).toFixed(2), Svg: () => <FireTwoTone />,
   },
   {
-    key: 'avgProductSales', title: '平均客單價', index: 'avgProductSales', render: (avgProductSales) => Math.abs(avgProductSales).toFixed(2),
+    key: 'avgProductSales', title: '平均客單價', index: 'avgProductSales', render: (avgProductSales) => `$${Math.abs(avgProductSales).toFixed(2)}`, Svg: () => <DollarCircleTwoTone />,
   }];
 
 export const buildOverview = (detail) => {
