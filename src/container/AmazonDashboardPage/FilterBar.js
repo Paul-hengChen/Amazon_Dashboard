@@ -11,8 +11,11 @@ const FilterBar = ({
   onDropdownClick, onDateChange, onAreaChange, area,
 }) => (
   <div className=" bg-white shadow-sm px-4 h-8 sticky top-0 z-20 mb-4 flex space-x-2">
-    {/* <RangeCalendar onChange={onDateChange} /> */}
-    <MonthPicker onChange={onDateChange} defaultValue={moment(new Date('2022-08'), 'YYYY-MM')} />
+    <MonthPicker
+      onChange={onDateChange}
+      defaultValue={moment(new Date('2022-08'), 'YYYY-MM')}
+      disabledDate={(currentMonth) => new Date(currentMonth).getMonth() + 1 > 9 || new Date(currentMonth).getMonth() + 1 < 8}
+    />
     <Select options={AREA_OPTIONS} onChange={onAreaChange} value={area} className="w-[120px]" />
     <Dropdown items={EXPORT_OPTIONS} onClick={onDropdownClick}>
       <div className="absolute right-2">

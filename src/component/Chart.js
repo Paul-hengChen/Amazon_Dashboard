@@ -65,7 +65,7 @@ const Chart = ({ dataset }) => {
   };
 
   return (
-    <div className="border border-solid p-5">
+    <div className="border border-solid p-5 mr-2 mb-2 shadow-lg">
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
