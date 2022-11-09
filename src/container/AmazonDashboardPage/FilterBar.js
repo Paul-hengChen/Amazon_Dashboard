@@ -19,7 +19,7 @@ const FilterBar = ({
     />
     <Select options={AREA_OPTIONS} onChange={onAreaChange} value={area} className="w-[120px]" />
     <Dropdown items={EXPORT_OPTIONS} onClick={onDropdownClick}>
-      <div className="absolute right-2">
+      <div className="absolute right-2 top-[6px]">
         <Button icon={<div className="mr-2"><ExportOutlined /></div>} text="匯出" type="primary" size="small" />
       </div>
     </Dropdown>

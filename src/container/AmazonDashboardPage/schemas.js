@@ -6,7 +6,7 @@ import {
 const overviewSchemas = [
   {
     key: 'currentMonth',
-    title: '時間',
+    title: '月份',
     index: 'currentMonth',
     render: (currentMonth) => `${currentMonth}月`,
     Svg: () => <ClockCircleTwoTone />,
@@ -105,7 +105,7 @@ const dashboardSchemas = [
     type: 'column',
     color: '#019858',
     yAxisTitle: '數量',
-    xAxisTitle: '時間',
+    xAxisTitle: '月份',
 
   },
   {
@@ -115,7 +115,7 @@ const dashboardSchemas = [
     type: 'column',
     color: '#9F0050',
     yAxisTitle: '數量',
-    xAxisTitle: '時間',
+    xAxisTitle: '月份',
 
   },
   {
@@ -125,7 +125,7 @@ const dashboardSchemas = [
     type: 'column',
     color: '#750075',
     yAxisTitle: '金額',
-    xAxisTitle: '時間',
+    xAxisTitle: '月份',
 
   },
   {
@@ -135,7 +135,7 @@ const dashboardSchemas = [
     type: 'column',
     color: '#4B0091',
     yAxisTitle: '人次',
-    xAxisTitle: '時間',
+    xAxisTitle: '月份',
 
   },
   {
@@ -145,7 +145,7 @@ const dashboardSchemas = [
     type: 'column',
     color: '#D26900',
     yAxisTitle: '金額',
-    xAxisTitle: '時間',
+    xAxisTitle: '月份',
   }];
 
 export const buildChartDataset = (detail) => {
