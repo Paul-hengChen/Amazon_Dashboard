@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const { RangePicker } = DatePicker;
 
-const RangeCalendar = ({ onChange }) => {
+const RangeCalendar = ({ onChange, ...props }) => {
   const onDateChange = (_, dateString) => {
     const startDate = dateString[0];
     const endDate = dateString[1];
@@ -18,6 +18,7 @@ const RangeCalendar = ({ onChange }) => {
       format="YYYY-MM-DD"
       allowClear={false}
       size="large"
+      {...props}
     />
   );
 };

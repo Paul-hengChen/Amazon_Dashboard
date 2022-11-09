@@ -5,11 +5,11 @@ import classNames from 'classnames';
 import { Button as AntdButton } from 'antd';
 
 const Button = ({
-  icon, size, type, onClick, text, className,
+  icon, onClick, text, className, ...props
 }) => {
   const classnames = classNames(className, 'items-center space-x-2 flex w-15 justify-between');
   return (
-    <AntdButton type={type} size={size} onClick={onClick}>
+    <AntdButton onClick={onClick} {...props}>
       <div className={classnames}>
         {icon && icon}
         {text}

@@ -37,11 +37,27 @@ const Chart = ({ dataset }) => {
     xAxis: {
       categories: dataset.labels,
       accessibility: { rangeDescription: '' },
+      labels: {
+        rotation: dataset.labels.length > 8 ? -45 : 0,
+      },
       crosshair: true,
+      title: {
+        align: 'high',
+        offset: 10,
+        text: dataset.xAxisTitle,
+        rotation: 0,
+        y: 10,
+      },
     },
 
     yAxis: {
-      title: { enabled: false },
+      title: {
+        align: 'high',
+        offset: 10,
+        text: dataset.yAxisTitle,
+        rotation: 0,
+        y: -20,
+      },
     },
     tooltip: {
       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -65,7 +81,7 @@ const Chart = ({ dataset }) => {
   };
 
   return (
-    <div className="border border-solid p-5 mr-2 mb-2 shadow-lg">
+    <div className="border border-solid p-5 mr-2 mb-2 shadow-lg rounded-lg">
       <HighchartsReact
         highcharts={Highcharts}
         options={options}

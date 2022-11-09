@@ -82,6 +82,9 @@ const dashboardSchemas = [
     color: '#004B97',
     render: (productSalesOfTOP10) => productSalesOfTOP10.map((item) => Number(Math.abs(item.productSales.toFixed(2)))),
     renderLabels: (productSalesOfTOP10) => productSalesOfTOP10.map((item) => item.sku ?? '-'),
+    yAxisTitle: '金額',
+    xAxisTitle: '品項',
+
   },
   {
     key: 'quantityOfTOP10',
@@ -91,6 +94,9 @@ const dashboardSchemas = [
     color: '#007979',
     render: (quantityOfTOP10) => quantityOfTOP10.map((item) => Number(Math.abs(item.quantity.toFixed(2)))),
     renderLabels: (quantityOfTOP10) => quantityOfTOP10.map((item) => item.sku ?? '-'),
+    yAxisTitle: '數量',
+    xAxisTitle: '品項',
+
   },
   {
     key: 'avgPurchase',
@@ -98,6 +104,9 @@ const dashboardSchemas = [
     index: 'avgPurchase',
     type: 'column',
     color: '#019858',
+    yAxisTitle: '數量',
+    xAxisTitle: '時間',
+
   },
   {
     key: 'quantity',
@@ -105,6 +114,9 @@ const dashboardSchemas = [
     index: 'quantity',
     type: 'column',
     color: '#9F0050',
+    yAxisTitle: '數量',
+    xAxisTitle: '時間',
+
   },
   {
     key: 'total',
@@ -112,6 +124,9 @@ const dashboardSchemas = [
     index: 'total',
     type: 'column',
     color: '#750075',
+    yAxisTitle: '金額',
+    xAxisTitle: '時間',
+
   },
   {
     key: 'numberOfPurchase',
@@ -119,6 +134,9 @@ const dashboardSchemas = [
     index: 'numberOfPurchase',
     type: 'column',
     color: '#4B0091',
+    yAxisTitle: '人次',
+    xAxisTitle: '時間',
+
   },
   {
     key: 'avgProductSales',
@@ -126,6 +144,8 @@ const dashboardSchemas = [
     index: 'avgProductSales',
     type: 'column',
     color: '#D26900',
+    yAxisTitle: '金額',
+    xAxisTitle: '時間',
   }];
 
 export const buildChartDataset = (detail) => {

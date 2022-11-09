@@ -10,8 +10,9 @@ import {
 const FilterBar = ({
   onDropdownClick, onDateChange, onAreaChange, area,
 }) => (
-  <div className=" bg-white shadow-sm px-4 h-8 sticky top-0 z-20 mb-4 flex space-x-2">
+  <div className="bg-white shadow-lg px-4 h-10 sticky top-0 z-20 mb-4 flex space-x-2">
     <MonthPicker
+      className="h-8"
       onChange={onDateChange}
       defaultValue={moment(new Date('2022-08'), 'YYYY-MM')}
       disabledDate={(currentMonth) => new Date(currentMonth).getMonth() + 1 > 9 || new Date(currentMonth).getMonth() + 1 < 8}
