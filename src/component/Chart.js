@@ -3,6 +3,27 @@ import PropTypes from 'prop-types';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
+Highcharts.theme = {
+
+  title: {
+    style: {
+      color: '#000',
+      font: 'bold 16px "Trebuchet MS", Verdana, sans-serif',
+    },
+  },
+
+  legend: {
+    itemStyle: {
+      font: '9pt Trebuchet MS, Verdana, sans-serif',
+    },
+    itemHoverStyle: {
+      color: 'dark',
+    },
+  },
+};
+// Apply the theme
+Highcharts.setOptions(Highcharts.theme);
+
 const Chart = ({ dataset }) => {
   const options = {
     title: {
