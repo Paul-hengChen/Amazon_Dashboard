@@ -54,14 +54,12 @@ const AmazonDashboardPage = () => {
         isOpen={modalOpen === 'ERP'}
         onCancel={() => setModalOpen('')}
         onOk={() => setModalOpen('')}
-        id="modal"
         date={startDate}
       />
       <CSVModal
         isOpen={modalOpen === 'CSV'}
         onCancel={() => setModalOpen('')}
         onOk={() => setModalOpen('')}
-        id="modal"
         date={startDate}
       />
     </>

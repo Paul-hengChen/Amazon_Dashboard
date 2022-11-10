@@ -10,7 +10,13 @@ const OverviewCardSegment = ({ details }) => {
       {content?.map(({
         title, key, value, Svg,
       }) => (
-        <Card key={key} style={{ 'max-width': '250px', 'border-radius': '16px', 'box-shadow': 'rgba(0, 0, 0, 0.35) 1px 3px 3px' }} bordered>
+        <Card
+          key={key}
+          style={{
+            'min-width': '180px', 'max-width': '250px', 'border-radius': '16px', 'box-shadow': 'rgba(0, 0, 0, 0.35) 1px 3px 3px',
+          }}
+          bordered
+        >
           <div className="flex">
             <div>
               <div className="text-lg font-medium">{title}</div>
