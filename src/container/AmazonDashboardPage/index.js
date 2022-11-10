@@ -50,8 +50,20 @@ const AmazonDashboardPage = () => {
       <div className="grid grid-cols-2 p-3">
         {dashboards.map((dashboard) => <Chart dataset={dashboard} />)}
       </div>
-      <ERPModal isOpen={modalOpen === 'ERP'} onCancel={() => setModalOpen('')} id="modal" />
-      <CSVModal isOpen={modalOpen === 'CSV'} onCancel={() => setModalOpen('')} id="modal" />
+      <ERPModal
+        isOpen={modalOpen === 'ERP'}
+        onCancel={() => setModalOpen('')}
+        onOk={() => setModalOpen('')}
+        id="modal"
+        date={startDate}
+      />
+      <CSVModal
+        isOpen={modalOpen === 'CSV'}
+        onCancel={() => setModalOpen('')}
+        onOk={() => setModalOpen('')}
+        id="modal"
+        date={startDate}
+      />
     </>
   );
 };
