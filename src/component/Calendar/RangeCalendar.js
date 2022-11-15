@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DatePicker } from 'antd';
-import moment from 'moment';
 
 const { RangePicker } = DatePicker;
 
@@ -14,10 +13,6 @@ const RangeCalendar = ({ onChange, ...props }) => {
   return (
     <RangePicker
       onChange={onDateChange}
-      defaultValue={[moment(new Date()), moment(new Date())]}
-      format="YYYY-MM-DD"
-      allowClear={false}
-      size="large"
       {...props}
     />
   );

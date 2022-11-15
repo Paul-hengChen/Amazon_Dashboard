@@ -6,12 +6,6 @@ import { buildChartDataset } from './schemas';
 import { CSVModal, ERPModal } from '../Modal';
 
 const AmazonDashboardPage = () => {
-  const [modalOpen, setModalOpen] = useState('');
-
-  const onDropdownClick = (key) => {
-    setModalOpen(key);
-  };
-
   const [startDate, setStartDate] = useState(new Date('2022-08-01'));
   const [endDate, setEndDate] = useState(new Date('2022-08-30'));
 
@@ -26,6 +20,11 @@ const AmazonDashboardPage = () => {
 
   const [overview, setOverview] = useState([]);
   const [dashboards, setDashboards] = useState([]);
+
+  const [modalOpen, setModalOpen] = useState('CSV');
+  const onDropdownClick = (key) => {
+    setModalOpen(key);
+  };
 
   useEffect(() => {
     (async () => {
