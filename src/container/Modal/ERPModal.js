@@ -7,7 +7,11 @@ import {
 } from '../../component';
 import { AREA_OPTIONS } from '../../constants';
 
-const ERPModal = ({ isOpen, date, ...props }) => {
+const ERPModal = ({ isOpen, onOk, ...props }) => {
+  const onConfirmClick = () => {
+    onOk();
+  };
+
   const [startDate, setStartDate] = useState(new Date('2022-08-01'));
   const [endDate, setEndDate] = useState(new Date('2022-08-31'));
 
@@ -20,7 +24,7 @@ const ERPModal = ({ isOpen, date, ...props }) => {
   const onAreaChange = (value) => setArea(value);
 
   return (
-    <Modal title="匯入 ERP" open={isOpen} className="px-3" centered {...props}>
+    <Modal title="匯入 ERP" open={isOpen} className="px-3" centered okText="確定" cancelText="取消" onOk={onConfirmClick} {...props}>
       <div className="text-center mb-2">
         <ExclamationCircleTwoTone style={{ fontSize: '72px' }} twoToneColor="#CE0000" />
         <Title text="確定匯入" />
@@ -43,6 +47,6 @@ const ERPModal = ({ isOpen, date, ...props }) => {
     </Modal>
   );
 };
-ERPModal.propTypes = { isOpen: PropTypes.bool, date: PropTypes.string };
+ERPModal.propTypes = { isOpen: PropTypes.bool, onOk: PropTypes.func };
 
 export default ERPModal;

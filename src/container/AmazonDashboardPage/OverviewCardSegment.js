@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { buildOverview } from './schemas';
 import { Card } from '../../component';
 
-const OverviewCardSegment = ({ details }) => {
+const OverviewCardSegment = ({ details = [] }) => {
   const content = buildOverview(details);
   return (
     <div className="m-3 flex space-x-4">

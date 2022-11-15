@@ -148,10 +148,10 @@ const dashboardSchemas = [
     xAxisTitle: '月份',
   }];
 
-export const buildChartDataset = (detail) => {
+export const buildChartDataset = (detail = []) => {
   const content = dashboardSchemas.map((schema) => {
-    const value = schema.render ? schema.render(detail[schema.index]) : [Number(Math.abs(detail[schema.index].toFixed(2)))];
-    const labels = schema.renderLabels ? schema.renderLabels(detail[schema.index]) : [`${detail.currentMonth}月`];
+    const value = schema.render ? schema.render(detail?.[schema.index]) : [Number(Math.abs(detail?.[schema.index].toFixed(2)))];
+    const labels = schema.renderLabels ? schema.renderLabels(detail?.[schema.index]) : [`${detail?.currentMonth}月`];
     return {
       ...schema,
       name: schema.name,
@@ -160,5 +160,5 @@ export const buildChartDataset = (detail) => {
       data: value,
     };
   });
-  return content;
+  return content ?? [];
 };

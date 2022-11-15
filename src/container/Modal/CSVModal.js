@@ -8,7 +8,10 @@ import {
 } from '../../component';
 import { AREA_OPTIONS } from '../../constants';
 
-const CSVModal = ({ isOpen, ...props }) => {
+const CSVModal = ({ isOpen, onOk, ...props }) => {
+  const onConfirmClick = () => {
+    onOk();
+  };
   const [startDate, setStartDate] = useState(new Date('2022-08-01'));
   const [endDate, setEndDate] = useState(new Date('2022-08-31'));
 
@@ -22,12 +25,12 @@ const CSVModal = ({ isOpen, ...props }) => {
   const onAreaChange = (value) => setArea(value);
 
   return (
-    <Modal title="下載CSV" open={isOpen} centered className="px-3" {...props}>
+    <Modal title="下載CSV" open={isOpen} centered className="px-3" okText="確定" cancelText="取消" onOk={onConfirmClick} {...props}>
       <div className="text-center mb-2">
         <InfoCircleTwoTone style={{ fontSize: '72px' }} twoToneColor="#FF9224" />
         <Title text="確定下載" />
       </div>
-      <div className=" justify-between  flex my-4">
+      <div className=" justify-between flex my-4">
         <div className="text-sm mr-2 self-center">日期: </div>
         <RangeCalendar
           className="h-8 w-[250px]"
@@ -45,6 +48,6 @@ const CSVModal = ({ isOpen, ...props }) => {
     </Modal>
   );
 };
-CSVModal.propTypes = { isOpen: PropTypes.bool };
+CSVModal.propTypes = { isOpen: PropTypes.bool, onOk: PropTypes.func };
 
 export default CSVModal;
