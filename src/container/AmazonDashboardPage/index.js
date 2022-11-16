@@ -37,40 +37,40 @@ const AmazonDashboardPage = () => {
     })();
   }, [startDate, endDate]);
 
-    <div className="justify-center items-center">
-      <img src={noDataImg} alt="" className="w-[200px] h-[200px]" />
-      <div className="text-xl">此時間區間無資料，請重新選擇日期</div>
-    </div>;
-
-    return (
-      <>
-        <FilterBar
-          onDropdownClick={onDropdownClick}
-          onDateChange={onDateChange}
-          onAreaChange={onAreaChange}
-          area={area}
-        />
-        <OverviewCardSegment details={overview} />
-        <div className="grid grid-cols-2 p-3">
-          {dashboards.length ? dashboards.map((dashboard) => <Chart dataset={dashboard} />) : (
-            <div className="justify-center items-center">
+  return (
+    <>
+      <FilterBar
+        onDropdownClick={onDropdownClick}
+        onDateChange={onDateChange}
+        onAreaChange={onAreaChange}
+        area={area}
+      />
+      <OverviewCardSegment details={overview} />
+      {dashboards.length
+        ? (
+          <div className="grid grid-cols-2 p-3">
+            { dashboards.map((dashboard) => <Chart dataset={dashboard} />)}
+          </div>
+        ) : (
+          <>
+            <div className="flex justify-center">
               <img src={noDataImg} alt="" className="w-[200px] h-[200px]" />
-              <div className="text-xl">此時間區間無資料，請重新選擇日期</div>
             </div>
-          )}
-        </div>
-        <ERPModal
-          isOpen={modalOpen === 'ERP'}
-          onCancel={() => setModalOpen('')}
-          onOk={setModalOpen}
-        />
-        <CSVModal
-          isOpen={modalOpen === 'CSV'}
-          onCancel={() => setModalOpen('')}
-          onOk={setModalOpen}
-        />
-      </>
-    );
+            <div className="text-xl text-center">此時間區間無資料，請重新選擇日期</div>
+          </>
+        )}
+      <ERPModal
+        isOpen={modalOpen === 'ERP'}
+        onCancel={() => setModalOpen('')}
+        onOk={setModalOpen}
+      />
+      <CSVModal
+        isOpen={modalOpen === 'CSV'}
+        onCancel={() => setModalOpen('')}
+        onOk={setModalOpen}
+      />
+    </>
+  );
 };
 
 export default AmazonDashboardPage;

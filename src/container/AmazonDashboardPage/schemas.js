@@ -70,7 +70,7 @@ export const buildOverview = (detail) => {
       value,
     };
   });
-  return content;
+  return content ?? [];
 };
 
 const dashboardSchemas = [
