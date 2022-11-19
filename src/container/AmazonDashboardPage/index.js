@@ -28,7 +28,7 @@ const AmazonDashboardPage = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}`);
+      const res = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}&area=${area}`);
       const detail = await res.json();
       setOverview(detail);
       // eslint-disable-next-line no-shadow

@@ -66,12 +66,9 @@ module.exports = {
     removeEmptyChunks: false,
     splitChunks: false,
   },
-  // performance: {
-  //   hints: 'warning',
-  //   maxEntrypointSize: 50000000,
-  //   maxAssetSize: 30000000,
-  //   assetFilter(assetFilename) {
-  //     return assetFilename.endsWith('.js');
-  //   },
-  // },
+  performance: {
+    hints: 'warning',
+    maxEntrypointSize: 50000000,
+    maxAssetSize: 30000000,
+  },
 };

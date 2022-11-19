@@ -15,7 +15,6 @@ const FilterBar = ({
       className="h-8"
       onChange={onDateChange}
       defaultValue={moment(new Date('2022-08'), 'YYYY-MM')}
-      disabledDate={(currentMonth) => new Date(currentMonth).getMonth() + 1 > 9 || new Date(currentMonth).getMonth() + 1 < 8}
     />
     <Select options={AREA_OPTIONS} onChange={onAreaChange} value={area} className="w-[120px]" />
     <Dropdown items={EXPORT_OPTIONS} onClick={onDropdownClick}>
