@@ -24,7 +24,7 @@ const ERPModal = ({ isOpen, onOk, ...props }) => {
   const onAreaChange = (value) => setArea(value);
 
   return (
-    <Modal title="匯入 ERP" open={isOpen} className="px-3" centered okText="確定" cancelText="取消" onOk={onConfirmClick} {...props}>
+    <Modal title="匯入 ERP" open={isOpen} className="px-3" centered okText="匯入" cancelText="取消" onOk={onConfirmClick} {...props}>
       <div className="text-center mb-2">
         <ExclamationCircleTwoTone style={{ fontSize: '72px' }} twoToneColor="#CE0000" />
         <Title text="確定匯入" />
