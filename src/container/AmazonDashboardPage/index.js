@@ -30,6 +30,7 @@ const AmazonDashboardPage = () => {
     (async () => {
       const res = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}&area=${area}`);
       const detail = await res.json();
+      if (!detail?.quantityOfTOP10?.length) { setOverview([]); setDashboards([]); return; }
       setOverview(detail);
       // eslint-disable-next-line no-shadow
       const dashboards = buildChartDataset(detail);
@@ -45,30 +46,33 @@ const AmazonDashboardPage = () => {
         onAreaChange={onAreaChange}
         area={area}
       />
-      <OverviewCardSegment details={overview} />
-      {dashboards.length
-        ? (
-          <div className="grid grid-cols-2 p-3">
-            { dashboards.map((dashboard) => <Chart dataset={dashboard} />)}
+      {!overview?.quantityOfTOP10?.length ? (
+        <>
+          <div className="flex justify-center">
+            <img src={noDataImg} alt="" className="w-[200px] h-[200px] mt-[300px]" />
           </div>
-        ) : (
+          <div className="text-xl text-center">此時間區間無資料，請重新選擇日期</div>
+        </>
+      )
+        : (
           <>
-            <div className="flex justify-center">
-              <img src={noDataImg} alt="" className="w-[200px] h-[200px]" />
+            <OverviewCardSegment details={overview} />
+            <div className="grid grid-cols-2 p-3">
+              { dashboards.map((dashboard) => <Chart dataset={dashboard} />)}
             </div>
-            <div className="text-xl text-center">此時間區間無資料，請重新選擇日期</div>
+            <ERPModal
+              isOpen={modalOpen === 'ERP'}
+              onCancel={() => setModalOpen('')}
+              onOk={setModalOpen}
+            />
+            <CSVModal
+              isOpen={modalOpen === 'CSV'}
+              onCancel={() => setModalOpen('')}
+              onOk={setModalOpen}
+            />
           </>
         )}
-      <ERPModal
-        isOpen={modalOpen === 'ERP'}
-        onCancel={() => setModalOpen('')}
-        onOk={setModalOpen}
-      />
-      <CSVModal
-        isOpen={modalOpen === 'CSV'}
-        onCancel={() => setModalOpen('')}
-        onOk={setModalOpen}
-      />
+
     </>
   );
 };

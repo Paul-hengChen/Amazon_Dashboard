@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { InfoCircleTwoTone } from '@ant-design/icons';
@@ -22,9 +22,15 @@ const CSVModal = ({ isOpen, onOk, ...props }) => {
   const [area, setArea] = useState('US');
   const onAreaChange = (value) => setArea(value);
 
+  const [showHint, setShowHint] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
   const onDownloadClick = async () => {
     const res = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}&area=${area}`);
     const detail = await res.json();
+
+    setSubmitted(true);
+    if (!detail.avgProductSales) { setShowHint(true); return; }
 
     const { filterData = [] } = detail;
 
@@ -61,6 +67,11 @@ const CSVModal = ({ isOpen, onOk, ...props }) => {
     onOk();
   };
 
+  useEffect(() => {
+    setSubmitted(false);
+    setShowHint(false);
+  }, [isOpen]);
+
   return (
     <Modal title="下載CSV" open={isOpen} centered className="px-3" okText="下載" cancelText="取消" onOk={onDownloadClick} {...props}>
       <div className="text-center mb-2">
@@ -78,10 +89,11 @@ const CSVModal = ({ isOpen, onOk, ...props }) => {
         <div className="text-sm mx-2 self-center">地區: </div>
         <Select options={AREA_OPTIONS} onChange={onAreaChange} value={area} className="w-[120px]" />
       </div>
-      <div className="text-center text-lg ">
+      <div className="text-center text-lg">
         <p>{`${moment(new Date(startDate)).format('YYYY/MM/DD')} - ${moment(new Date(endDate)).format('YYYY/MM/DD')}`}</p>
         <p>Amazon 銷售相關資訊 ?</p>
       </div>
+      {submitted && showHint && <div className="text-center text-lg text-red-500">此時間區間無資料，請重新選擇日期</div>}
     </Modal>
   );
 };

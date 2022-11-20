@@ -80,7 +80,10 @@ const USDashboardSchemas = [
     index: 'productSalesOfTOP10',
     type: 'column',
     color: '#004B97',
-    render: (productSalesOfTOP10) => productSalesOfTOP10.map((item) => Number(Math.abs(item.productSales.toFixed(2)))),
+    render: (productSalesOfTOP10) => {
+      if (!productSalesOfTOP10.length) return null;
+      return productSalesOfTOP10.map((item) => Number(Math.abs(item.productSales.toFixed(2))));
+    },
     renderLabels: (productSalesOfTOP10) => productSalesOfTOP10.map((item) => item.sku ?? '-'),
     yAxisTitle: '金額',
     xAxisTitle: '品項',
@@ -92,7 +95,10 @@ const USDashboardSchemas = [
     index: 'quantityOfTOP10',
     type: 'column',
     color: '#007979',
-    render: (quantityOfTOP10) => quantityOfTOP10.map((item) => Number(Math.abs(item.quantity.toFixed(2)))),
+    render: (quantityOfTOP10) => {
+      if (!quantityOfTOP10.length) return null;
+      return quantityOfTOP10.map((item) => Number(Math.abs(item.quantity.toFixed(2))));
+    },
     renderLabels: (quantityOfTOP10) => quantityOfTOP10.map((item) => item.sku ?? '-'),
     yAxisTitle: '數量',
     xAxisTitle: '品項',
@@ -155,7 +161,10 @@ const JPDashboardSchemas = [
     index: 'productSalesOfTOP10',
     type: 'column',
     color: '#004B97',
-    render: (productSalesOfTOP10) => productSalesOfTOP10.map((item) => Number(Math.abs(item.diffProductSales.toFixed(2)))),
+    render: (productSalesOfTOP10) => {
+      if (!productSalesOfTOP10.length) return null;
+      return productSalesOfTOP10.map((item) => Number(Math.abs(item.diffProductSales.toFixed(2))));
+    },
     renderLabels: (productSalesOfTOP10) => productSalesOfTOP10.map((item) => item.SKU ?? '-'),
     yAxisTitle: '金額',
     xAxisTitle: '品項',
@@ -166,7 +175,10 @@ const JPDashboardSchemas = [
     index: 'quantityOfTOP10',
     type: 'column',
     color: '#007979',
-    render: (quantityOfTOP10) => quantityOfTOP10.map((item) => Number(Math.abs(item.quantity.toFixed(2)))),
+    render: (quantityOfTOP10) => {
+      if (!quantityOfTOP10.length) return null;
+      return quantityOfTOP10.map((item) => Number(Math.abs(item.quantity.toFixed(2))));
+    },
     renderLabels: (quantityOfTOP10) => quantityOfTOP10.map((item) => item.SKU ?? '-'),
     yAxisTitle: '數量',
     xAxisTitle: '品項',
@@ -225,8 +237,12 @@ const JPDashboardSchemas = [
 export const buildChartDataset = (detail = [], area) => {
   const schemas = area === 'US' ? USDashboardSchemas : JPDashboardSchemas;
   const content = schemas.map((schema) => {
-    const value = schema.render ? schema.render(detail?.[schema.index]) : [Number(Math.abs(detail?.[schema.index].toFixed(2)))];
-    const labels = schema.renderLabels ? schema.renderLabels(detail?.[schema.index]) : [`${detail?.currentMonth}月`];
+    const value = schema.render
+      ? schema.render(detail?.[schema.index])
+      : [Number(Math.abs(detail?.[schema.index].toFixed(2)))];
+    const labels = schema.renderLabels
+      ? schema.renderLabels(detail?.[schema.index])
+      : [`${detail?.currentMonth}月`];
     return {
       ...schema,
       name: schema.name,

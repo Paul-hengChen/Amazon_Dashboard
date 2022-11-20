@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { ExclamationCircleTwoTone } from '@ant-design/icons';
@@ -8,10 +8,6 @@ import {
 import { AREA_OPTIONS } from '../../constants';
 
 const ERPModal = ({ isOpen, onOk, ...props }) => {
-  const onConfirmClick = () => {
-    onOk();
-  };
-
   const [startDate, setStartDate] = useState(new Date('2022-08-01'));
   const [endDate, setEndDate] = useState(new Date('2022-08-31'));
 
@@ -22,6 +18,20 @@ const ERPModal = ({ isOpen, onOk, ...props }) => {
   };
   const [area, setArea] = useState('US');
   const onAreaChange = (value) => setArea(value);
+
+  const [showHint, setShowHint] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const onConfirmClick = () => {
+    setSubmitted(true);
+    setShowHint(!showHint); // TODO: fix the condition
+    onOk();
+  };
+
+  useEffect(() => {
+    setSubmitted(false);
+    setShowHint(false);
+  }, [isOpen]);
 
   return (
     <Modal title="匯入 ERP" open={isOpen} className="px-3" centered okText="匯入" cancelText="取消" onOk={onConfirmClick} {...props}>
@@ -44,6 +54,7 @@ const ERPModal = ({ isOpen, onOk, ...props }) => {
         <p>{`${moment(new Date(startDate)).format('YYYY/MM/DD')} - ${moment(new Date(endDate)).format('YYYY/MM/DD')}`}</p>
         <p>Amazon 銷售相關資訊 ?</p>
       </div>
+      {submitted && showHint && <div className="text-center text-lg text-red-500">此時間區間無資料，請重新選擇日期</div>}
     </Modal>
   );
 };
