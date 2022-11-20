@@ -88,10 +88,10 @@ export const summaryOfJPData = (filterData) => {
 
   const numberOfPurchase = filterData.length; // 購買人次
 
-  // const productSalesOfTOP10 = sortingFunc(filterData, 'productSales').slice(0, 10); // 產品銷售金額TOP10
-  // const quantityOfTOP10 = sortingFunc(filterData, 'quantity').slice(0, 10); // 產品銷售數量TOP10
+  const productSalesOfTOP10 = sortingFunc(filterData, 'diffProductSales').slice(0, 10); // 產品銷售金額TOP10
+  const quantityOfTOP10 = sortingFunc(filterData, 'quantity').slice(0, 10); // 產品銷售數量TOP10
 
   return {
-    ...totalOfItems, avgPurchase, numberOfPurchase, avgProductSales,
+    ...totalOfItems, avgPurchase, numberOfPurchase, avgProductSales, quantityOfTOP10, productSalesOfTOP10,
   };
 };

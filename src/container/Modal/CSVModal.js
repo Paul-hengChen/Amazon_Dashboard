@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { InfoCircleTwoTone } from '@ant-design/icons';
 import ExcelJs from 'exceljs';
-import { USHeader } from './schemas';
+import { USHeader, JPHeader } from './schemas';
 import {
   Modal, RangeCalendar, Select, Title,
 } from '../../component';
@@ -27,14 +27,25 @@ const CSVModal = ({ isOpen, onOk, ...props }) => {
     const detail = await res.json();
 
     const { filterData = [] } = detail;
-    const rows = filterData.map((data) => Object.values(data));
+
+    let rows = [];
+    if (area === 'JP') {
+      const JPData = filterData.map((data) => {
+        // eslint-disable-next-line no-param-reassign
+        delete data.diffProductSales;
+        return { ...data };
+      });
+      rows = JPData.map((data) => Object.values(data));
+    } else rows = filterData.map((data) => Object.values(data));
 
     const workbook = new ExcelJs.Workbook();
     const sheet = workbook.addWorksheet(area);
+    const headers = area === 'US' ? USHeader : JPHeader;
+
     sheet.addTable({
       name: 'table名稱',
       ref: 'A1',
-      columns: USHeader.map((header) => ({ name: header })),
+      columns: headers.map((header) => ({ name: header })),
       rows,
     });
 

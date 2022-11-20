@@ -73,7 +73,7 @@ export const buildOverview = (detail) => {
   return content ?? [];
 };
 
-const dashboardSchemas = [
+const USDashboardSchemas = [
   {
     key: 'productSalesOfTOP10',
     name: '產品銷售金額TOP10',
@@ -148,8 +148,83 @@ const dashboardSchemas = [
     xAxisTitle: '月份',
   }];
 
-export const buildChartDataset = (detail = []) => {
-  const content = dashboardSchemas.map((schema) => {
+const JPDashboardSchemas = [
+  {
+    key: 'productSalesOfTOP10',
+    name: '產品銷售金額TOP10',
+    index: 'productSalesOfTOP10',
+    type: 'column',
+    color: '#004B97',
+    render: (productSalesOfTOP10) => productSalesOfTOP10.map((item) => Number(Math.abs(item.diffProductSales.toFixed(2)))),
+    renderLabels: (productSalesOfTOP10) => productSalesOfTOP10.map((item) => item.SKU ?? '-'),
+    yAxisTitle: '金額',
+    xAxisTitle: '品項',
+  },
+  {
+    key: 'quantityOfTOP10',
+    name: '產品銷售數量TOP10',
+    index: 'quantityOfTOP10',
+    type: 'column',
+    color: '#007979',
+    render: (quantityOfTOP10) => quantityOfTOP10.map((item) => Number(Math.abs(item.quantity.toFixed(2)))),
+    renderLabels: (quantityOfTOP10) => quantityOfTOP10.map((item) => item.SKU ?? '-'),
+    yAxisTitle: '數量',
+    xAxisTitle: '品項',
+  },
+  {
+    key: 'avgPurchase',
+    name: '平均購買數量',
+    index: 'avgPurchase',
+    type: 'column',
+    color: '#019858',
+    yAxisTitle: '數量',
+    xAxisTitle: '月份',
+
+  },
+  {
+    key: 'quantity',
+    name: '銷售數量',
+    index: 'quantity',
+    type: 'column',
+    color: '#9F0050',
+    yAxisTitle: '數量',
+    xAxisTitle: '月份',
+
+  },
+  {
+    key: 'total',
+    name: '營業額',
+    index: 'total',
+    type: 'column',
+    color: '#750075',
+    yAxisTitle: '金額',
+    xAxisTitle: '月份',
+
+  },
+  {
+    key: 'numberOfPurchase',
+    name: '購買人次',
+    index: 'numberOfPurchase',
+    type: 'column',
+    color: '#4B0091',
+    yAxisTitle: '人次',
+    xAxisTitle: '月份',
+
+  },
+  {
+    key: 'avgProductSales',
+    name: '平均客單價',
+    index: 'avgProductSales',
+    type: 'column',
+    color: '#D26900',
+    yAxisTitle: '金額',
+    xAxisTitle: '月份',
+  }];
+
+// eslint-disable-next-line default-param-last
+export const buildChartDataset = (detail = [], area) => {
+  const schemas = area === 'US' ? USDashboardSchemas : JPDashboardSchemas;
+  const content = schemas.map((schema) => {
     const value = schema.render ? schema.render(detail?.[schema.index]) : [Number(Math.abs(detail?.[schema.index].toFixed(2)))];
     const labels = schema.renderLabels ? schema.renderLabels(detail?.[schema.index]) : [`${detail?.currentMonth}月`];
     return {
