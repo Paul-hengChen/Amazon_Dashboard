@@ -15,7 +15,7 @@ const AmazonDashboardPage = () => {
     setEndDate(new Date(endDate));
   };
 
-  const [area, setArea] = useState('JP');
+  const [area, setArea] = useState('US');
   const onAreaChange = (value) => setArea(value);
 
   const [overview, setOverview] = useState([]);
@@ -33,7 +33,7 @@ const AmazonDashboardPage = () => {
       if (!detail?.quantityOfTOP10?.length) { setOverview([]); setDashboards([]); return; }
       setOverview(detail);
       // eslint-disable-next-line no-shadow
-      const dashboards = buildChartDataset(detail);
+      const dashboards = buildChartDataset(detail, area);
       setDashboards(dashboards);
     })();
   }, [startDate, endDate, area]);
