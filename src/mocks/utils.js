@@ -57,11 +57,11 @@ export const summaryOfUSData = (filterData) => {
 
 export const summaryOfJPData = (filterData) => {
   const totalOfItems = filterData.reduce((acc, cur) => {
-    const total = acc.合計 + cur.合計; // 營業收入
+    const total = acc.total + cur.total; // 營業收入
 
-    const quantity = acc.数量 + cur.数量; // 銷售數量
+    const quantity = acc.quantity + cur.quantity; // 銷售數量
 
-    const productSales = (acc.商品売上 + cur.商品売上) + (acc.商品の売上税, cur.商品の売上税); // 銷售金額
+    const productSales = acc.productSales + cur.商品売上 + cur.商品の売上税; // 銷售金額
 
     const platformRelatedFee = acc.platformRelatedFee // 平台相關費用
     + cur.配送料
@@ -79,10 +79,10 @@ export const summaryOfJPData = (filterData) => {
       productSales, platformRelatedFee, quantity, total,
     };
   }, {
-    商品売上: 0, 商品の売上税: 0, platformRelatedFee: 0, 数量: 0, 合計: 0,
+    productSales: 0, platformRelatedFee: 0, quantity: 0, total: 0,
   });
 
-  const avgPurchase = totalOfItems.数量 / filterData.length; // 平均購買量
+  const avgPurchase = totalOfItems.quantity / filterData.length; // 平均購買量
 
   const avgProductSales = totalOfItems.productSales / filterData.length; // 平均客單價
 

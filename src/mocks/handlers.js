@@ -6,7 +6,16 @@ import {
 } from './mockData';
 
 const RAW_DATA_US = [...DATA_202201_202207, ...DATA_202208, ...DATA_202209, ...DATA_202210].map((file) => ({ ...file, date: new Date(file.date) }));
-const RAW_DATA_JP = JPData.map((data) => ({ ...data, 日付_時間: new Date(data.日付_時間) }));
+const RAW_DATA_JP = JPData.map((data) => ({
+  ...data,
+  date: new Date(data.date),
+  total: typeof data.total === 'string' ? Number(data.total.replace(',', '')) : data.total,
+  商品売上: typeof data.商品売上 === 'string' ? Number(data.商品売上.replace(',', '')) : data.商品売上,
+  商品の売上税: typeof data.商品の売上税 === 'string' ? Number(data.商品の売上税.replace(',', '')) : data.商品の売上税,
+  その他: typeof data.その他 === 'string' ? Number(data.その他.replace(',', '')) : data.その他,
+  FBA手数料: typeof data.FBA手数料 === 'string' ? Number(data.FBA手数料.replace(',', '')) : data.FBA手数料,
+  手数料: typeof data.手数料 === 'string' ? Number(data.手数料.replace(',', '')) : data.手数料,
+}));
 
 export const handlers = [
   rest.get('/amazon/dashboard', (req, res, ctx) => {

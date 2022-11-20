@@ -15,7 +15,7 @@ const AmazonDashboardPage = () => {
     setEndDate(new Date(endDate));
   };
 
-  const [area, setArea] = useState('US');
+  const [area, setArea] = useState('JP');
   const onAreaChange = (value) => setArea(value);
 
   const [overview, setOverview] = useState([]);
@@ -35,7 +35,7 @@ const AmazonDashboardPage = () => {
       const dashboards = buildChartDataset(detail);
       setDashboards(dashboards);
     })();
-  }, [startDate, endDate]);
+  }, [startDate, endDate, area]);
 
   return (
     <>
