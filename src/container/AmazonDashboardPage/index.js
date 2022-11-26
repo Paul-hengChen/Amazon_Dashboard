@@ -1,4 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
+import { Spin } from 'antd';
 import { Chart } from '../../component';
 import OverviewCardSegment from './OverviewCardSegment';
 import FilterBar from './FilterBar';
@@ -7,6 +9,8 @@ import { CSVModal, ERPModal, CheckoutModal } from '../Modal';
 import { noDataImg } from '../../img/png';
 
 const AmazonDashboardPage = () => {
+  const [isFetch, setIsFetched] = useState(false);
+
   const [startDate, setStartDate] = useState(new Date('2022-08-01'));
   const [endDate, setEndDate] = useState(new Date('2022-08-30'));
   // eslint-disable-next-line no-shadow
@@ -21,20 +25,23 @@ const AmazonDashboardPage = () => {
   const [overview, setOverview] = useState([]);
   const [dashboards, setDashboards] = useState([]);
 
-  const [modalOpen, setModalOpen] = useState('checkout');
+  const [modalOpen, setModalOpen] = useState('');
   const onDropdownClick = (key) => {
     setModalOpen(key);
   };
 
   useEffect(() => {
     (async () => {
+      setIsFetched(false);
       const req = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}&area=${area}`);
       const res = await req.json();
-      if (!res?.quantityOfTOP10?.length) { setOverview([]); setDashboards([]); return; }
-      setOverview(res);
-      // eslint-disable-next-line no-shadow
-      const dashboards = buildChartDataset(res, area);
-      setDashboards(dashboards);
+      if (!res?.quantityOfTOP10?.length) { setOverview([]); setDashboards([]); } else {
+        setOverview(res);
+        // eslint-disable-next-line no-shadow
+        const dashboards = buildChartDataset(res, area);
+        setDashboards(dashboards);
+      }
+      setIsFetched(true);
     })();
   }, [startDate, endDate, area]);
 
@@ -46,7 +53,7 @@ const AmazonDashboardPage = () => {
         onAreaChange={onAreaChange}
         area={area}
       />
-      {!overview?.quantityOfTOP10?.length ? (
+      {!isFetch ? <div className="absolute top-1/2 right-1/2"><Spin tip="Loading..." size="large" delay={2} /></div> : !overview?.quantityOfTOP10?.length ? (
         <>
           <div className="flex justify-center">
             <img src={noDataImg} alt="" className="w-[200px] h-[200px] mt-[300px]" />

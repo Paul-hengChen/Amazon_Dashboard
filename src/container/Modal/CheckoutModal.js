@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { InfoCircleTwoTone } from '@ant-design/icons';
 import ExcelJs from 'exceljs';
+import { Spin } from 'antd';
 import { US_CHECKOUT_HEADER, JP_CHECKOUT_HEADER } from './schemas';
 import {
   Modal, Select, Title,
@@ -17,13 +18,16 @@ const CheckoutModal = ({ isOpen, onOk, ...props }) => {
   const onWeekIntervalChange = (value) => {
     setWeekInterval(value);
   };
+  const [isFetch, setIsFetched] = useState(false);
 
   useEffect(() => {
     (async () => {
+      setIsFetched(false);
       const req = await fetch(`/amazon/dashboard/weekInterval/options?area=${area}`);
       const { options } = await req.json();
       setWeekOptions(options);
       setWeekInterval('');
+      setIsFetched(true);
     })();
   }, [area]);
 
@@ -71,25 +75,30 @@ const CheckoutModal = ({ isOpen, onOk, ...props }) => {
 
   return (
     <Modal title="下載區間總表" open={isOpen} centered className="px-3" okText="下載" cancelText="取消" onOk={onDownloadClick} {...props}>
-      <div className="text-center mb-2">
-        <InfoCircleTwoTone style={{ fontSize: '72px' }} twoToneColor="#FF9224" />
-        <Title text="確定下載" />
-      </div>
-      <div className="flex my-4 justify-center">
-        <div className="mr-4 flex">
-          <div className="text-sm mr-4 self-center">地區: </div>
-          <Select options={AREA_OPTIONS} onChange={onAreaChange} value={area} className="w-[120px] mr-2" />
-        </div>
-        <div className="mr-4 flex">
-          <div className="text-sm mr-2 self-center">週期區間: </div>
-          <Select options={weekOptions} onChange={onWeekIntervalChange} value={weekInterval} className="w-[120px] mr-2" />
-        </div>
-      </div>
-      <div className="text-center text-lg">
-        <p>{`${area}地區 ${weekInterval}區間`}</p>
-        <p>結帳區間總表 ?</p>
-      </div>
-      {submitted && showHint && <div className="text-center text-lg text-red-500">此時間區間無資料，請重新選擇日期</div>}
+      { !isFetch ? <div className="flex justify-center"><Spin tip="Loading..." size="large" delay={2} /></div>
+        : (
+          <>
+            <div className="text-center mb-2">
+              <InfoCircleTwoTone style={{ fontSize: '72px' }} twoToneColor="#FF9224" />
+              <Title text="確定下載" />
+            </div>
+            <div className="flex my-4 justify-center">
+              <div className="mr-4 flex">
+                <div className="text-sm mr-4 self-center">地區: </div>
+                <Select options={AREA_OPTIONS} onChange={onAreaChange} value={area} className="w-[120px] mr-2" />
+              </div>
+              <div className="mr-4 flex">
+                <div className="text-sm mr-2 self-center">週期區間: </div>
+                <Select options={weekOptions} onChange={onWeekIntervalChange} value={weekInterval} className="w-[120px] mr-2" />
+              </div>
+            </div>
+            <div className="text-center text-lg">
+              <p>{`${area}地區 ${weekInterval}區間`}</p>
+              <p>結帳區間總表 ?</p>
+            </div>
+            {submitted && showHint && <div className="text-center text-lg text-red-500">此時間區間無資料，請重新選擇日期</div>}
+          </>
+        )}
     </Modal>
   );
 };
