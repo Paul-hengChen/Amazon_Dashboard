@@ -13,17 +13,18 @@ const CSVModal = ({ isOpen, onOk, ...props }) => {
   const [startDate, setStartDate] = useState(new Date('2022-08-01'));
   const [endDate, setEndDate] = useState(new Date('2022-08-31'));
 
+  const [showHint, setShowHint] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
   // eslint-disable-next-line no-shadow
   const onDateChange = ({ startDate, endDate }) => {
     setStartDate(startDate);
     setEndDate(endDate);
+    setShowHint(false);
   };
 
   const [area, setArea] = useState('US');
   const onAreaChange = (value) => setArea(value);
-
-  const [showHint, setShowHint] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
 
   const onDownloadClick = async () => {
     const req = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}&area=${area}`);

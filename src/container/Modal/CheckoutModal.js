@@ -13,10 +13,14 @@ const CheckoutModal = ({ isOpen, onOk, ...props }) => {
   const [area, setArea] = useState('US');
   const onAreaChange = (value) => setArea(value);
 
+  const [showHint, setShowHint] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
   const [weekInterval, setWeekInterval] = useState('');
   const [weekOptions, setWeekOptions] = useState([]);
   const onWeekIntervalChange = (value) => {
     setWeekInterval(value);
+    setShowHint(false);
   };
   const [isFetch, setIsFetched] = useState(false);
 
@@ -30,9 +34,6 @@ const CheckoutModal = ({ isOpen, onOk, ...props }) => {
       setIsFetched(true);
     })();
   }, [area]);
-
-  const [showHint, setShowHint] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
 
   const onDownloadClick = async () => {
     const req = await fetch(`/amazon/dashboard/checkout?weekInterval=${weekInterval}&area=${area}`);
