@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { InfoCircleTwoTone } from '@ant-design/icons';
 import ExcelJs from 'exceljs';
-import { USHeader, JPHeader } from './schemas';
+import { US_HEADER, JP_HEADER } from './schemas';
 import {
   Modal, RangeCalendar, Select, Title,
 } from '../../component';
@@ -26,13 +26,13 @@ const CSVModal = ({ isOpen, onOk, ...props }) => {
   const [submitted, setSubmitted] = useState(false);
 
   const onDownloadClick = async () => {
-    const res = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}&area=${area}`);
-    const detail = await res.json();
+    const req = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}&area=${area}`);
+    const res = await req.json();
 
     setSubmitted(true);
-    if (!detail.avgProductSales) { setShowHint(true); return; }
+    if (!res.avgProductSales) { setShowHint(true); return; }
 
-    const { filterData = [] } = detail;
+    const { filterData = [] } = res;
 
     let rows = [];
     if (area === 'JP') {
@@ -46,7 +46,7 @@ const CSVModal = ({ isOpen, onOk, ...props }) => {
 
     const workbook = new ExcelJs.Workbook();
     const sheet = workbook.addWorksheet(area);
-    const headers = area === 'US' ? USHeader : JPHeader;
+    const headers = area === 'US' ? US_HEADER : JP_HEADER;
 
     sheet.addTable({
       name: 'table名稱',
@@ -73,7 +73,7 @@ const CSVModal = ({ isOpen, onOk, ...props }) => {
   }, [isOpen]);
 
   return (
-    <Modal title="下載CSV" open={isOpen} centered className="px-3" okText="下載" cancelText="取消" onOk={onDownloadClick} {...props}>
+    <Modal title="下載 Amazon 財務報表" open={isOpen} centered className="px-3" okText="下載" cancelText="取消" onOk={onDownloadClick} {...props}>
       <div className="text-center mb-2">
         <InfoCircleTwoTone style={{ fontSize: '72px' }} twoToneColor="#FF9224" />
         <Title text="確定下載" />

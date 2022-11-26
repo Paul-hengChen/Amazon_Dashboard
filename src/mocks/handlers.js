@@ -1,8 +1,10 @@
 import { rest } from 'msw';
 import moment from 'moment';
-import { parseSearch, summaryOfUSData, summaryOfJPData } from './utils';
 import {
-  DATA_202210, DATA_202209, DATA_202208, DATA_202201_202207, JPData,
+  parseSearch, summaryOfUSData, summaryOfJPData, buildWeekIntervalOptions,
+} from './utils';
+import {
+  DATA_202210, DATA_202209, DATA_202208, DATA_202201_202207, JPData, CHECKOUT_US, CHECKOUT_JP,
 } from './mockData';
 
 const RAW_DATA_US = [...DATA_202201_202207, ...DATA_202208, ...DATA_202209, ...DATA_202210].map((file) => ({ ...file, date: new Date(file.date) }));
@@ -39,6 +41,30 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json({ ...data, filterData, currentMonth }),
+    );
+  }),
+
+  rest.get('/amazon/dashboard/weekInterval/options', (req, res, ctx) => {
+    const { area } = parseSearch(req.url.search);
+    let options = [];
+    if (area === 'US') { options = buildWeekIntervalOptions(CHECKOUT_US); } else { options = buildWeekIntervalOptions(CHECKOUT_JP); }
+    return res(
+      ctx.status(200),
+      ctx.json({ options }),
+    );
+  }),
+
+  rest.get('/amazon/dashboard/checkout', (req, res, ctx) => {
+    const { area, weekInterval } = parseSearch(req.url.search);
+    let data = null;
+    if (area === 'US') {
+      data = CHECKOUT_US.filter((item) => item.weekInterval === weekInterval);
+    } else {
+      data = CHECKOUT_JP.filter((item) => item.weekInterval === weekInterval);
+    }
+    return res(
+      ctx.status(200),
+      ctx.json({ data }),
     );
   }),
 

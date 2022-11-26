@@ -95,3 +95,10 @@ export const summaryOfJPData = (filterData) => {
     ...totalOfItems, avgPurchase, numberOfPurchase, avgProductSales, quantityOfTOP10, productSalesOfTOP10,
   };
 };
+
+export const buildWeekIntervalOptions = (dataset) => {
+  const weekIntervals = dataset.map((data) => data.weekInterval);
+  const filterOptions = weekIntervals.filter((item, index) => weekIntervals.indexOf(item) === index);
+  const options = filterOptions.map((option) => ({ key: option, value: option, label: option }));
+  return options;
+};

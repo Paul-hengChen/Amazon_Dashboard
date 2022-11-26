@@ -5,5 +5,6 @@ export const AREA_OPTIONS = [
 
 export const EXPORT_OPTIONS = [
   { key: 'ERP', value: 'ERP', label: '匯入 ERP' },
-  { key: 'CSV', value: 'CSV', label: '下載 CSV' },
+  { key: 'CSV', value: 'CSV', label: '財務報表' },
+  { key: 'checkout', value: 'checkout', label: '區間總表' },
 ];

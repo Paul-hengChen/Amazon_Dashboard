@@ -3,7 +3,7 @@ import { Chart } from '../../component';
 import OverviewCardSegment from './OverviewCardSegment';
 import FilterBar from './FilterBar';
 import { buildChartDataset } from './schemas';
-import { CSVModal, ERPModal } from '../Modal';
+import { CSVModal, ERPModal, CheckoutModal } from '../Modal';
 import { noDataImg } from '../../img/png';
 
 const AmazonDashboardPage = () => {
@@ -21,19 +21,19 @@ const AmazonDashboardPage = () => {
   const [overview, setOverview] = useState([]);
   const [dashboards, setDashboards] = useState([]);
 
-  const [modalOpen, setModalOpen] = useState('');
+  const [modalOpen, setModalOpen] = useState('checkout');
   const onDropdownClick = (key) => {
     setModalOpen(key);
   };
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}&area=${area}`);
-      const detail = await res.json();
-      if (!detail?.quantityOfTOP10?.length) { setOverview([]); setDashboards([]); return; }
-      setOverview(detail);
+      const req = await fetch(`/amazon/dashboard?startDate=${startDate}&endDate=${endDate}&area=${area}`);
+      const res = await req.json();
+      if (!res?.quantityOfTOP10?.length) { setOverview([]); setDashboards([]); return; }
+      setOverview(res);
       // eslint-disable-next-line no-shadow
-      const dashboards = buildChartDataset(detail, area);
+      const dashboards = buildChartDataset(res, area);
       setDashboards(dashboards);
     })();
   }, [startDate, endDate, area]);
@@ -70,6 +70,7 @@ const AmazonDashboardPage = () => {
               onCancel={() => setModalOpen('')}
               onOk={setModalOpen}
             />
+            <CheckoutModal isOpen={modalOpen === 'checkout'} onCancel={() => setModalOpen('')} onOk={setModalOpen} />
           </>
         )}
 
